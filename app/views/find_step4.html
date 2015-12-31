@@ -1,0 +1,40 @@
+<!-- Find Advisor step 3 -->
+<div class="container">
+    <div class="row">
+      <h3> Dates:</h3>
+      <div class="row row-content ">
+       <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+        <div class="row row-center">
+            <div class="col-xs-12 col-sm-2 col-sm-offset-2">
+                <h3> Depart </h3>
+            </div>
+            <div class="col-xs-12 col-sm-2 col-sm-offset-3">
+                <h3> Return </h3>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-2 col-sm-offset-2">
+                <input type="date" datepicker-popup="MM/dd/yyyy" ng-model="date_depart" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="" ng-required="true" />
+            </div>
+            <div class="col-xs-12 col-sm-2 col-sm-offset-3">
+                <input type="date" datepicker-popup="MM/dd/yyyy" ng-model="date_return" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="" ng-required="true" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+   <div class="col-xs-12 col-sm-2 col-sm-offset-2">
+    <a ui-sref="app.step3" class="btn btn-block btn-info" ng-click="fillDates(date_depart,date_return)">
+     Previous Section<span class="glyphicon glyphicon-circle-arrow-left"></span>
+ </a>
+</div> 
+<div class="col-xs-12 col-sm-2 col-sm-offset-3">
+    <a ui-sref="app.summary" class="btn btn-block btn-info" ng-click="fillDates(date_depart,date_return)">
+        Summary <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    </a>
+</div> 
+</div>
+</form>
+</div>
+</div>

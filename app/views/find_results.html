@@ -1,0 +1,25 @@
+<div class="container">
+        <div class="row row-content" ng-controller="ResultController">
+            <div class="row row-content">
+            <div class="col-xs-12">
+	      <h3>Results:</h3>
+            </div>
+            <div class="col-xs-12" >
+                <div class="tab-content">
+                   <ul class="media-list tab-pane fade in active">
+                        <li class="media" ng-repeat="advisor in advisors">
+                            <div class="media-left media-middle">
+				 <img class="media-object img-thumbnail"
+				  ng-src={{advisor.image}} height="200" width="200" alt="Advisor">
+                            </div>
+                            <div class="media-body">
+                                <h2 class="media-heading">{{advisor.name}}
+                                 <span class="badge">{{advisor.price | currency}}</span></h2>
+                                 <p ng-show="showDetails">{{advisor.description}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+       </div>
+       </div> 

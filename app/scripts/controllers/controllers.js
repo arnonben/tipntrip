@@ -75,30 +75,25 @@
         $scope.a = 1;
     }])
 
-    .controller('SigninController' ,['$scope','$firebaseSimpleLogin',function($scope,$firebaseSimpleLogin){
-        var firebaseObj = new Firebase("https://tipandtrip.firebaseio.com/");
-        var loginObj = $firebaseSimpleLogin(firebaseObj);
-
-        $scope.SignIn = function($scope) {
-            var username = $scope.user.email;
-            var password = $scope.user.password;
-
-            console.log(username);
-            console.log(password);
-             
-            loginObj.$login('password', {
-                email: username,
-                password: password
-            })
-            .then(function(user) {
-                user = user;
-                console.log('Authentication successful');
-            }, function(error) {
-                error = error;
-                console.log('Authentication failure');
-            });
-        };
-    }])
+        .controller('SigninController' ,['$scope','$firebaseAuth',function($scope,$firebaseAuth){
+            $scope.email = "";
+            $scope.password = "";
+            $scope.SignIn = function(){ 
+                var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+                ref.authWithPassword({
+                  email    : $scope.email,
+                  password : $scope.password
+                }, function(error, authData) {
+                  if (error) {
+                    console.log("Login Failed!", error);
+                  } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                  }
+                });
+                $scope.email = "";
+                $scope.password = "";
+          };
+        }])
 
     .controller('RegisterController', ['$scope', function($scope) {
         $scope.data = 1;

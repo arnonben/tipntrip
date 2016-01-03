@@ -67,33 +67,35 @@
 
     }])
 
-    .controller('ResultsController', ['$scope', function($scope) {
-        $scope.a = 1;
-    }])
-
     .controller('ProfileController', ['$scope', function($scope) {
         $scope.a = 1;
     }])
 
-        .controller('SigninController' ,['$scope','$firebaseAuth',function($scope,$firebaseAuth){
-            $scope.email = "";
-            $scope.password = "";
-            $scope.SignIn = function(){ 
-                var ref = new Firebase("https://tipandtrip.firebaseio.com/");
-                ref.authWithPassword({
-                  email    : $scope.email,
-                  password : $scope.password
-                }, function(error, authData) {
-                  if (error) {
-                    console.log("Login Failed!", error);
-                  } else {
-                    console.log("Authenticated successfully with payload:", authData);
-                  }
-                });
-                $scope.email = "";
-                $scope.password = "";
-          };
-        }])
+    .controller('SigninController' ,['$scope','$firebaseAuth','$state',function($scope,$firebaseAuth,$state){
+        $scope.initFunc= function(){
+            $scope.user = {email:"",password:""};
+            $scope.loginForm.$setPristine();
+        };
+
+        $scope.SignIn = function(){ 
+            
+        var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+        ref.authWithPassword({
+            email    : $scope.user.email,
+            password : $scope.user.password
+          }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+                $scope.user = {email:"",password:""};
+                $scope.loginForm.$setPristine();
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+                $state.go('app.step1');
+            }
+        });
+            
+        };
+    }])
 
     .controller('RegisterController', ['$scope', function($scope) {
         $scope.data = 1;

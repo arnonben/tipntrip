@@ -90,7 +90,7 @@ angular
                     },
                     'content': {
                         templateUrl : 'views/sigin.html',
-                        controller  : 'RegisterController'
+                        controller  : 'LoginController'
                     },
                     'footer': {
                         templateUrl : 'views/footer.html',

@@ -1,6 +1,6 @@
 // Karma configuration
 // http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2015-12-31 using
+// Generated on 2016-01-03 using
 // generator-karma 1.0.0
 
 module.exports = function(config) {
@@ -11,7 +11,7 @@ module.exports = function(config) {
     autoWatch: true,
 
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
@@ -21,6 +21,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      // bower:js
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular/angular.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/ng-password-strength/dist/scripts/ng-password-strength.js',
+      // endbower
+      "app/scripts/**/*.js",
+      "test/mock/**/*.js",
+      "test/spec/**/*.js"
     ],
 
     // list of files / patterns to exclude

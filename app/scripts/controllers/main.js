@@ -8,8 +8,8 @@
  * Controller of the tipntrip2App
  */
 angular.module('tipntrip2App')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
+  .controller('MainCtrl', function () {
+    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'

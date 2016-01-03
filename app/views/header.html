@@ -20,14 +20,22 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                           <li>
-                            <a ui-sref="login">
+                            <a ui-sref="login" ng-show="!isCurrent">
                                 <span class="glyphicon glyphicon-home"
-                                aria-hidden="true"></span> Login</a>
+                                aria-hidden="true"></span> Login </a>
                             </li>
-                            <li><a ui-sref="signin">
+                            <li><a ui-sref="signin" ng-show="!isCurrent">
                                 <span class="glyphicon glyphicon-info-sign"
                                 aria-hidden="true"></span> Sign In</a>
                             </li>
+                            <li><a ui-sref="app.step1" ng-show="isCurrent">
+                                <span class="glyphicon glyphicon-info-sign"
+                                aria-hidden="true"></span> {{email}}</a>
+                            </li>
+                            <li><a ui-sref="app.step1" ng-show="isCurrent" ng-click="logout()">
+                                <span class="glyphicon glyphicon-info-sign"
+                                aria-hidden="true"></span> Logout</a>
+                            </li>                            
                         </ul>
                     </div>
                 </div>

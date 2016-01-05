@@ -73,15 +73,20 @@
 
     .controller('SigninController' ,['$scope','$firebaseAuth','$state','$window',function($scope,$firebaseAuth,$state,$window){
         $scope.user = {email:"",password:""};
-
+        $scope.user.remember = false;
         $scope.SignIn = function(){ 
             var mail = $scope.user.email;
             var pass = $scope.user.password;
-            var err = "";
+            var rem = "default";
+            if ($scope.user.remember){
+                rem = "sessionOnly";
+            }
+
             var ref = new Firebase("https://tipandtrip.firebaseio.com/");
             ref.authWithPassword({
                 email    : mail,
-                password : pass
+                password : pass,
+                remember: rem
               }, function(error, authData) {
                   if (error) {
                      $window.alert(error);
@@ -92,6 +97,19 @@
             });
                 
         };
+
+        $scope.Reset = function(){
+            var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+            ref.resetPassword({
+              email : $scope.reset.email
+            }, function(error) {
+              if (error === null) {
+                console.log("Password reset email sent successfully");
+              } else {
+                console.log("Error sending password reset email:", error);
+              }
+});
+        }
     }])
 
     .controller('RegisterController', ['$scope','$firebaseAuth','$state','$window',function($scope,$firebaseAuth,$state,$window) {
@@ -119,7 +137,8 @@
                 ref.child("users").child(userData.uid).set({
                         first_name: $scope.user.firstname,
                         last_name: $scope.user.lastname,
-                        username: $scope.user.username
+                        username: $scope.user.username,
+                        isAdvisor: false
 
                 });
                 ref.authWithPassword({

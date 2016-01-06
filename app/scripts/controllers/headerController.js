@@ -1,5 +1,5 @@
     'use strict';
-    angular.module('tipntrip2App')
+    angular.module('tipntripApp')
         .controller('HeaderContorller', ['$scope','$firebaseAuth', function($scope,$firebaseAuth) {
         	var ref = new Firebase("https://tipandtrip.firebaseio.com/");
 			var authData = ref.getAuth();

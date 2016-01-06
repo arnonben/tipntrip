@@ -1,6 +1,6 @@
     /*global Firebase */
     'use strict';
-    angular.module('tipntrip2App')
+    angular.module('tipntripApp')
     .controller('SearchController', ['$scope', 'countryFactory', 'interestsFactory', function($scope, countryFactory, interestsFactory) {
         $scope.name = 'World';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tipntrip2App')
+angular.module('tipntripApp')
         .factory('countryFactory', [function() {
     
             var countryfac = {};

@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('tipntrip2App', [
+  .module('tipntripApp', [
     'ngResource',
     'ui.router',
     'firebase',

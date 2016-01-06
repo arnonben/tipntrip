@@ -1,0 +1,47 @@
+{
+  "rules": {
+     "users": {
+          ".read": "auth != null",
+          "$user": {
+            ".write": "auth.uid === $user && (!newData.exists() || newData.hasChildren())",
+            "fist_name": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "last_name": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "username": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "email": {
+               ".validate": "newData.isString() && newData.val().length <=320"
+            },
+            "$other": {
+               ".validate": false
+            }
+         }
+    },
+    "chat-messages": {
+      ".read": "auth != null",
+      ".write":  "auth != null",
+      "$chatId": {
+          ".indexOn": ["createdAt"] 
+      }
+    },
+    "user-chats": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$chatId": {
+          ".indexOn": ["modifiedAt"] 
+      }
+    },
+    "chat-members": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "chat-metas": {
+      ".read":"auth != null",
+      ".write":"auth != null"
+    }
+  }
+}

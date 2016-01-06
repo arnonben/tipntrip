@@ -1,4 +1,5 @@
-// Generated on 2015-12-31 using generator-angular 0.11.1
+
+// Generated on 2016-01-04 using generator-angularfire 1.0.0
 'use strict';
 
 // # Globbing
@@ -177,6 +178,9 @@ module.exports = function (grunt) {
 
     // Automatically inject Bower components into the app
     wiredep: {
+      options: {
+        cwd: ''
+      },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath:  /\.\.\//
@@ -269,17 +273,16 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
+//    imagemin: {
+//      dist: {
+//        files: [{
+//          expand: true,
+//          cwd: '<%= yeoman.app %>/images',
+//          src: '{,*/}*.{png,jpg,jpeg,gif}',
+//          dest: '<%= yeoman.dist %>/images'
+//        }]
+//      }
+//    },
     svgmin: {
       dist: {
         files: [{
@@ -375,7 +378,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'imagemin',
+        //'imagemin',
         'svgmin'
       ]
     },

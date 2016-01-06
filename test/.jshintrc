@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "node": true,
   "browser": true,
   "esnext": true,
@@ -26,3 +27,26 @@
   }
 }
 
+=======
+  "bitwise": true,
+  "browser": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "immed": true,
+  "jasmine": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "node": true,
+  "quotmark": "single",
+  "strict": true,
+  "undef": true,
+  "unused": true,
+  "globals": {
+    "angular": false,
+    "inject": false
+  }
+}
+>>>>>>> 5499722b43192f31d826514ffb5f20afca3ad0d8

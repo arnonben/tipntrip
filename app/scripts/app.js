@@ -13,7 +13,8 @@ angular
     'ngResource',
     'ui.router',
     'firebase',
-    'ngPasswordStrength'
+    'ngPasswordStrength',
+    
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
      $stateProvider
@@ -27,7 +28,7 @@ angular
                     },
                     'content': {
                         templateUrl : 'views/find.html',
-                        controller  : 'SearchController'
+                        controller  : 'SearchCtrl'
                     },
                     'footer': {
                         templateUrl : 'views/footer.html',

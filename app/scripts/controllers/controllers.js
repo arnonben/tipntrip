@@ -1,49 +1,7 @@
     /*global Firebase */
     'use strict';
     angular.module('tipntripApp')
-    .controller('SearchController', ['$scope', 'countryFactory', 'interestsFactory', function($scope, countryFactory, interestsFactory) {
-        $scope.name = 'World';
-
-        $scope.countries = countryFactory.getCountries();
-
-        $scope.roles = interestsFactory.getInterestes();
-        
-        $scope.countryList = []; 
-        $scope.addCountry= function(select_country){
-            $scope.check = select_country.name;
-            $scope.countryList.push($scope.check);                    
-        };
-
-        $scope.user = {
-            roles: []
-        };
-        $scope.checkAll = function() {
-            $scope.user.roles = angular.copy($scope.roles);
-        };
-        $scope.uncheckAll = function() {
-            $scope.user.roles = [];
-        };
-        $scope.checkFirst = function() {
-            $scope.user.roles.splice(0, $scope.user.roles.length); 
-        };                        
-
-        $scope.budget = 1;
-
-        $scope.setBudget = function(newBudget){
-            $scope.budget = newBudget;
-        };
-
-        $scope.date_depart = "";
-        $scope.date_return = "";
-
-        $scope.fillDates = function(date_depart , date_return){
-            $scope.date_depart = date_depart;
-            $scope.date_return = date_return;
-        };
-    }])
-
-
-
+    
     .controller('ResultController', ['$scope', function($scope) {
         $scope.advisors =[
         {

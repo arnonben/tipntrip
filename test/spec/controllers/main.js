@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('tipntrip2App'));
+  beforeEach(module('tipntripApp'));
 
   var MainCtrl,
     scope;

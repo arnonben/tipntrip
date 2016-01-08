@@ -10,11 +10,13 @@
  */
 angular
   .module('tipntripApp', [
+    'ngAnimate',
+    'ui.bootstrap',
     'ngResource',
     'ui.router',
     'firebase',
     'ngPasswordStrength',
-    
+    'checklist-model',
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
      $stateProvider

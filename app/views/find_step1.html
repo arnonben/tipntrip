@@ -41,13 +41,14 @@
 				</div>
 			</div>
 			<div class="col-xs-12 col-lg-4">
-				<div class="col-lg-12 row-center">
-					<h4>My Trip:</h4>
-				</div>
+				<h4 class="row-center">My Trip:</h4>
 				<div class="row">
 					<ul>
 						<li ng-repeat="destination in destinationsList">
-							<h4>{{destination.name}} (<span ng-repeat="city in destination.citiesSelected"> {{city.name}} , </span> ) </h4>
+							<h4>{{destination.name}} 
+								<span ng-show="containCities(destination)">(</span> 
+								<span ng-repeat="city in destination.citiesSelected"> {{city.name}}  </span> 
+								<span ng-show="containCities(destination)">)</span> </h4>
 						</li>
 					</ul>
 				</div>

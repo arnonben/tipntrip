@@ -92,8 +92,16 @@ angular.module('tipntripApp')
     */
     $scope.addDestination= function(select_country){
         $scope.destinationsList.push($scope.currentCountry);
-        $scope.resetCurrentCountry();                    
+        $scope.resetCurrentCountry();   
+        console.log($scope.destinationsList);                 
     };
+
+    $scope.containCities = function(destination){
+        if (destination.citiesSelected.length > 0){
+            return true;
+        }
+        return false;
+    }
 
     /*
     Step 2 choose your interests
@@ -121,11 +129,17 @@ angular.module('tipntripApp')
         $scope.budget = newBudget;
     };
 
-    $scope.date_depart = "";
-    $scope.date_return = "";
+    /*
+    Step 4 choose your departure and return dates.
+    */ 
 
-    $scope.fillDates = function(date_depart , date_return){
-        $scope.date_depart = date_depart;
-        $scope.date_return = date_return;
-    };
+    $scope.today = function(){
+        $scope.date_depart = new Date();
+        $scope.date_return = new Date();
+        $scope.date_return.setDate($scope.date_return.getDate() + 1);
+    }
+
+    $scope.today();
+
+
   }]);

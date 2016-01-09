@@ -132,14 +132,11 @@ angular.module('tipntripApp')
     /*
     Step 4 choose your departure and return dates.
     */ 
+    $scope.date_depart = new Date();
+    $scope.date_return = new Date();
+    $scope.date_return.setDate($scope.date_return.getDate() + 1);
 
-    $scope.today = function(){
-        $scope.date_depart = new Date();
-        $scope.date_return = new Date();
-        $scope.date_return.setDate($scope.date_return.getDate() + 1);
-    }
-
-    $scope.today();
+    //$scope.today();
 
 
   }]);

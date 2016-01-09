@@ -44,11 +44,20 @@
 			<h4>Dates</h4>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-offset-4">
-			<h4> {{date_depart}} {{date_return}}}</h4>
-			</div>
-		</div>
 
+	</div>
+	<div class="row">
+		<div class="row">
+		   	<div class="col-xs-12 col-sm-2 col-sm-offset-2">
+			    <a ui-sref="app.step3" class="btn btn-block btn-info" ng-click="fillDates(date_depart,date_return)">
+			     Previous Section<span class="glyphicon glyphicon-circle-arrow-left"></span>
+				</a>
+			</div> 
+			<div class="col-xs-12 col-sm-2 col-sm-offset-4">
+			    <a ui-sref="results" class="btn btn-block btn-info">
+			        Find <span class="glyphicon glyphicon-circle-arrow-right"></span>
+			    </a>
+			</div>
+		</div> 
 	</div>
 </div>

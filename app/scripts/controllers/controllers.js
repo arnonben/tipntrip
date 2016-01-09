@@ -1,24 +1,6 @@
     /*global Firebase */
     'use strict';
     angular.module('tipntripApp')
-    
-    .controller('ResultController', ['$scope', function($scope) {
-        $scope.advisors =[
-        {
-            image: "images/arnon.jpg",
-            name:"Arnon Benshahar",
-            price:"20",
-            description:"Click to edit summaryDiligent class master student in the computer science department. Finished my B.S. Computer Science in Bioinformatic's track in honor. Designed and implemented Applied Materials solutions as an application engineer for one year. Led part of the education effort in the Ilan Ramon Center-Yatziv project, a science education project for youth. Currently I am a part of EMC-BGU WWH project."
-        },
-        {
-            image: "images/yaron.jpg",
-            name:"Yaron Been",
-            price:"20",
-            description:"Led dozens of Search and Rescue missions, commanding a 5-member combat unit  Managed the work schedules of the soldiers in 669 unit"
-        }
-        ];
-
-    }])
 
     .controller('AboutusController', ['$scope', function($scope) {
         $scope.a = 1;

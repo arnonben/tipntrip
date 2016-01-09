@@ -103,8 +103,41 @@ angular
                               templateUrl : 'views/footer.html',
                           }
                       }
+               })
+
+        .state('results', {
+                      url:'/results',
+                      views: {
+                          'header': {
+                              templateUrl : 'views/header.html',
+                              controller  : 'HeaderContorller'
+                          },
+                          'content': {
+                              templateUrl : 'views/results.html',
+                              controller  : 'ResultsCtrl'
+                          },
+                          'footer': {
+                              templateUrl : 'views/footer.html',
+                          }
+                      }
+               })
+
+      .state('advisor_register', {
+                    url:'/advisor_register',
+                    views: {
+                        'header': {
+                            templateUrl : 'views/header.html',
+                            controller  : 'HeaderContorller'
+                        },
+                        'content': {
+                            templateUrl : 'views/registeradvisor.html',
+                            controller  : 'RegisterAdvisorCtrl'
+                        },
+                        'footer': {
+                            templateUrl : 'views/footer.html',
+                        }
+                    }
                });
-             
         // catch all route
         // send users to the find page 
         $urlRouterProvider.otherwise('/app/step1');

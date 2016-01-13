@@ -8,7 +8,18 @@
  * Controller of the tipntrip2App
  */
 angular.module('tipntripApp')
-  .controller('SearchCtrl', ['$scope', 'countryFactory','cityFactory', 'interestsFactory', function($scope, countryFactory,cityFactory,interestsFactory) {
+  .controller('SearchCtrl', ['$scope', 
+                             'countryFactory',
+                             'cityFactory', 
+                             'interestsFactory',
+                             '$firebaseAuth',
+                             '$firebaseArray', 
+                             function($scope, 
+                                      countryFactory,
+                                      cityFactory,
+                                      interestsFactory,
+                                      $firebaseAuth,
+                                      $firebaseArray) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -136,7 +147,105 @@ angular.module('tipntripApp')
     $scope.date_return = new Date();
     $scope.date_return.setDate($scope.date_return.getDate() + 1);
 
-    //$scope.today();
+    /*
+    Results
+    */
 
+        /*
+    Retrieve data from Firebase db based on the search fields: Foar the moment will be only
+    countries
+    */
+    $scope.advisors = [
+        {
+            first_name: "Arnon",
+            last_name: "Benshahar",
+            title: "Best guide in the middle east",
+            price: 50,
+            interests:["Museums","Nature","Beaches"],
+            countries: ["Jordan","Israel","China"],
+            description: "I will give the best trip you can imagine please select me.",
+            image: "/images/arnon.jpg",
+            reviews: 0,
+            rate: 4
+        },
+        {
+            first_name: "Ben",
+            last_name: "Eshel",
+            title: "Best guide in the middle east",
+            price: 30,
+            interests:["Museums","Nature","Beaches"],
+            countries: ["Jordan","Israel","China"],
+            description: "I will give the best trip you can imagine please select me.",
+            image: "/images/beneshel.jpg",
+            reviews: 0,
+            rate: 3
+        }
+
+    ];
+    $scope.ratings = [{
+        current: 5,
+        max: 10
+    }, {
+        current: 3,
+        max: 5
+    }];
+
+    $scope.getResults = function(){
+        var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+        $scope.advisorsUid = [];
+        for (var i = $scope.destinationsList.length - 1; i >= 0; i--) {
+            var dest = $scope.destinationsList[i].name;
+            ref.child("advisors-countries").orderByChild(dest).equalTo("true").on("value", function(snapshot) {     
+                snapshot.forEach(function(childSnapshot) {
+                    var key = childSnapshot.key();
+                    var childData = childSnapshot.val();
+                    var containUid = function(key){
+                        for (var i = $scope.advisorsUid.length - 1; i >= 0; i--) {
+                            if($scope.advisorsUid[i] === key){
+                                return true;
+                            }
+                        }
+                        return false;
+                    };
+
+                    if(!containUid(key)){
+                       $scope.advisorsUid.push(key); 
+                    }
+
+                });
+
+                for (var i = $scope.advisorsUid.length - 1; i >= 0; i--) {
+                    $scope.advisor = {};
+                    ref.child("users").child($scope.advisorsUid[i]).on("value", function(snapshot) {
+                            var tmp = snapshot.val();
+                            $scope.key = snapshot.key();
+                            $scope.advisor.reviews = 0;
+                            $scope.advisor.rate = 4;
+                            $scope.advisor.first_name = tmp.first_name;
+                            $scope.advisor.last_name = tmp.last_name;
+                            ref.child("advisors").child($scope.key).on("value", function(snapshot) {
+                                var tmp = snapshot.val();
+                                $scope.advisor.price = tmp.price;
+                                $scope.advisor.description = tmp.description;
+                                $scope.advisor.title = tmp.title;
+                                ref.child("advisors-countries").child($scope.key).on("value", function(snapshot) {
+                                    $scope.advisor.countries = [];
+                                    snapshot.forEach(function(childSnapshot) {
+                                        $scope.advisor.countries.push(childSnapshot.key());
+                                    });
+                                    ref.child("advisors-interests").child($scope.key).on("value", function(snapshot){
+                                        $scope.advisor.interests = [];
+                                        snapshot.forEach(function(childSnapshot) {
+                                            $scope.advisor.interests.push(childSnapshot.key());
+                                        });
+                                    });
+                                });
+                            });                       
+                    });
+                };
+
+            });
+        };
+    };
 
   }]);

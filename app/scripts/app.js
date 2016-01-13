@@ -26,7 +26,7 @@ angular
             views: {
                     'header': {
                         templateUrl : 'views/header.html',
-                        controller  : 'HeaderContorller'
+                        controller  : 'HeaderCtrl'
                     },
                     'content': {
                         templateUrl : 'views/find.html',
@@ -37,9 +37,6 @@ angular
                     }
                 }
         })
-        
-        
-        
         // nested states 
         // each of these sections will have their own view
         // url will be nested (/find/step1)
@@ -69,18 +66,22 @@ angular
                   url: '/summary',
                   templateUrl: 'views/find_summary.html'
               })
+        .state('app.results',{
+                  url: '/results',
+                  templateUrl: 'views/find_results.html'
+        })
         
         .state('login', {
                       url:'/login',
                       views: {
                           'header': {
                               templateUrl : 'views/header.html',
-                              controller  : 'HeaderContorller'
+                              controller  : 'HeaderCtrl'
 
                           },
                           'content': {
                               templateUrl : 'views/login.html',
-                              controller  : 'SigninController'
+                              controller  : 'SigninCtrl'
                           },
                           'footer': {
                               templateUrl : 'views/footer.html',
@@ -93,28 +94,11 @@ angular
                       views: {
                           'header': {
                               templateUrl : 'views/header.html',
-                              controller  : 'HeaderContorller'
+                              controller  : 'HeaderCtrl'
                           },
                           'content': {
                               templateUrl : 'views/sigin.html',
-                              controller  : 'RegisterController'
-                          },
-                          'footer': {
-                              templateUrl : 'views/footer.html',
-                          }
-                      }
-               })
-
-        .state('results', {
-                      url:'/results',
-                      views: {
-                          'header': {
-                              templateUrl : 'views/header.html',
-                              controller  : 'HeaderContorller'
-                          },
-                          'content': {
-                              templateUrl : 'views/results.html',
-                              controller  : 'ResultsCtrl'
+                              controller  : 'RegisterCtrl'
                           },
                           'footer': {
                               templateUrl : 'views/footer.html',
@@ -127,7 +111,7 @@ angular
                     views: {
                         'header': {
                             templateUrl : 'views/header.html',
-                            controller  : 'HeaderContorller'
+                            controller  : 'HeaderCtrl'
                         },
                         'content': {
                             templateUrl : 'views/registeradvisor.html',

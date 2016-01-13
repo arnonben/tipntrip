@@ -1,4 +1,4 @@
-<div class="container" ng-controller="SigninController" >
+<div class="container">
    <div class="row">
       <div class="col-xs-12">
          <ul class="breadcrumb">
@@ -43,6 +43,9 @@
                </div>
             </div>
             <div class=" col-sm-12 alert alert-info text-center"></div>
+         </form>
+         <form class="form-horizontal" name="loginFacebookForm" ng-submit="FacebookSignIn()"   novalidate>
+            <button type="submit" class="btn btn-primary">Login through Facebook</button>
          </form>
       </div>
       <div class="col-xs-12 col-sm-3">

@@ -8,121 +8,17 @@
  *
  * Main module of the application.
  */
-angular
-  .module('tipntripApp', [
+angular.module('tipntripApp', [
     'ngAnimate',
-    'ui.bootstrap',
+    'ngCookies',
     'ngResource',
-    'ui.router',
+    'ngRoute',
+    'ngSanitize',
+    'ngTouch',
     'firebase',
-    'ngPasswordStrength',
+    'firebase.ref',
+    'firebase.auth',
+    'ui.bootstrap',
+    'ui.router',
     'checklist-model',
-  ])
-  .config(function ($stateProvider, $urlRouterProvider) {
-     $stateProvider
-            // route to show our basic find (/find)
-        .state('app', {
-            url: '/app',
-            views: {
-                    'header': {
-                        templateUrl : 'views/header.html',
-                        controller  : 'HeaderCtrl'
-                    },
-                    'content': {
-                        templateUrl : 'views/find.html',
-                        controller  : 'SearchCtrl'
-                    },
-                    'footer': {
-                        templateUrl : 'views/footer.html',
-                    }
-                }
-        })
-        // nested states 
-        // each of these sections will have their own view
-        // url will be nested (/find/step1)
-        .state('app.step1', {
-            url: '/step1',
-            templateUrl: 'views/find_step1.html'
-        })
-        
-        // url will be /find/step2
-        .state('app.step2', {
-            url: '/step2',
-            templateUrl: 'views/find_step2.html'
-        })
-        
-        // url will be /find/step3
-        .state('app.step3', {
-            url: '/step3',
-            templateUrl: 'views/find_step3.html'
-        })
-  
-        .state('app.step4', {
-                  url: '/step4',
-                  templateUrl: 'views/find_step4.html'
-              })
-        
-        .state('app.summary', {
-                  url: '/summary',
-                  templateUrl: 'views/find_summary.html'
-              })
-        .state('app.results',{
-                  url: '/results',
-                  templateUrl: 'views/find_results.html'
-        })
-        
-        .state('login', {
-                      url:'/login',
-                      views: {
-                          'header': {
-                              templateUrl : 'views/header.html',
-                              controller  : 'HeaderCtrl'
-
-                          },
-                          'content': {
-                              templateUrl : 'views/login.html',
-                              controller  : 'SigninCtrl'
-                          },
-                          'footer': {
-                              templateUrl : 'views/footer.html',
-                          }
-                      }
-               })
-        
-        .state('signin', {
-                      url:'/signin',
-                      views: {
-                          'header': {
-                              templateUrl : 'views/header.html',
-                              controller  : 'HeaderCtrl'
-                          },
-                          'content': {
-                              templateUrl : 'views/sigin.html',
-                              controller  : 'RegisterCtrl'
-                          },
-                          'footer': {
-                              templateUrl : 'views/footer.html',
-                          }
-                      }
-               })
-
-      .state('advisor_register', {
-                    url:'/advisor_register',
-                    views: {
-                        'header': {
-                            templateUrl : 'views/header.html',
-                            controller  : 'HeaderCtrl'
-                        },
-                        'content': {
-                            templateUrl : 'views/registeradvisor.html',
-                            controller  : 'RegisterAdvisorCtrl'
-                        },
-                        'footer': {
-                            templateUrl : 'views/footer.html',
-                        }
-                    }
-               });
-        // catch all route
-        // send users to the find page 
-        $urlRouterProvider.otherwise('/app/step1');
-  });
+  ]);

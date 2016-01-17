@@ -1,78 +1,35 @@
-<div class="container">
-   <div class="row">
-      <div class="col-xs-12">
-         <ul class="breadcrumb">
-            <li><a href="index.html">Home</a></li>
-            <li class="active">Login</li>
-         </ul>
-      </div>
-      <div class="col-xs-12">
-         <h3>Login</h3>
-         <hr>
-      </div>
-   </div>
-   <div class="row row-content">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-         <form class="form-horizontal" name="loginForm" ng-submit="SignIn()"  ng-init="initFunc()" novalidate>
-            <div class="form-group"  ng-class="{ 'has-error has-feedback' : loginForm.email.$invalid && !loginForm.email.$pristine }">
-               <label for="name" class="col-sm-2 control-label">Email</label>
-               <div class="col-sm-10">
-                  <input type="email" class="form-control" id="emailid" name="email" placeholder="Email" ng-model="user.email" required>
-               </div>
-               <span ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-               <span ng-show="(loginForm.email.$invalid || loginForm.email.$error.required) && !loginForm.email.$pristine" class="help-block">Enter a valid email address.</span>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$error.required && !loginForm.password.$pristine }">
-               <label for="name" class="col-sm-2 control-label">Password</label>
-               <div class="col-sm-10">
-                  <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Passowrd" ng-model="user.password" required>
-               </div>
-               <span ng-show="loginForm.password.$error.required && !loginForm.password.$pristine" class="help-block">Your Password is required.</span>
-            </div>
-            <div class="form-group"  ng-class="{ 'has-error' : invalidChannelSelection }">
-               <div class="checkbox col-sm-5 col-sm-offset-2">
-                  <label class="checkbox-inline">
-                  <input type="checkbox" ng-model="user.remember">
-                  <strong>Remember me?</strong>
-                  </label>
-               </div>
-            </div>
-            <div class="form-group">
-               <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>
-               </div>
-            </div>
-            <div class=" col-sm-12 alert alert-info text-center"></div>
-         </form>
-         <form class="form-horizontal" name="loginFacebookForm" ng-submit="FacebookSignIn()"   novalidate>
-            <button type="submit" class="btn btn-primary">Login through Facebook</button>
-         </form>
-      </div>
-      <div class="col-xs-12 col-sm-3">
-      </div>
-   </div>
-   <div class="col-xs-12">
-      <h3>Reset Password</h3>
-      <hr>
-   </div>
-   <div class="row row-content">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-          <form class="form-horizontal" name="resetForm" ng-submit="Reset()"  novalidate>
-            <div class="form-group"  ng-class="{ 'has-error has-feedback' : resetForm.email.$invalid && !resetForm.email.$pristine }">
-               <label for="name" class="col-sm-2 control-label">Email</label>
-               <div class="col-sm-10">
-                  <input type="email" class="form-control" id="emailid" name="email" placeholder="Email" ng-model="reset.email" required>
-               </div>
-               <span ng-show="resetForm.email.$invalid && !resetForm.email.$pristine" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-               <span ng-show="(resetForm.email.$invalid || resetForm.email.$error.required) && !resetForm.email.$pristine" class="help-block">Enter a valid email address.</span>
-            </div>
-            <div class="form-group">
-               <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-primary" ng-disabled="resetForm.$invalid">Reset Password</button>
-               </div>
-            </div>
-            <div class=" col-sm-12 alert alert-info text-center"></div>
-         </form>
-      </div>
-   </div>
-</div>
+
+<h2>Login Page</h2>
+
+<fieldset>
+  <legend>Oauth</legend>
+  <p>
+    <button  class="btn btn-primary" ng-click="oauthLogin('facebook')">Facebook</button>
+    <button  class="btn btn-primary" ng-click="oauthLogin('google')">Google</button>
+  </p>
+</fieldset>
+
+<form role="form">
+  <p class="form-group">
+    <label for="loginEmail">email</label>
+    <input id="loginEmail" required name="email" type="email" ng-model="email" class="form-control" />
+  </p>
+  <p class="form-group">
+    <label for="loginPass">password</label>
+    <input id="loginPass" required name="pass" type="password" ng-model="pass" class="form-control" />
+  </p>
+  <p class="form-group" ng-cloak ng-show="createMode">
+    <label for="loginConfirm">confirm pass</label>
+    <input id="loginConfirm" required name="confirm" type="password" ng-model="confirm" class="form-control" />
+  </p>
+
+  <p>
+    <button  class="btn btn-primary" ng-click="passwordLogin(email, pass)" ng-hide="createMode">Log In</button>
+    <button  class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Register</button>
+    <button  class="btn btn-primary" ng-cloak ng-show="createMode"
+            ng-click="createAccount(email, pass, confirm)">Create Account</button>
+    <button  class="btn btn-default" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
+  </p>
+</form>
+<p ng-show="err" class="bg-danger">{{err}}</p>
+

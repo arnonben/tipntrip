@@ -81,6 +81,8 @@ angular.module('tipntripApp')
 	$scope.createAdvisor = function(){
 		//First we create a new Advisor in the Advisor list
 		var uid = $scope.uid;
+
+		//Get the advisor data.
 		var advisorRef = $scope.ref.child("advisors").child(uid);
 		var description = $scope.description
 		var price = $scope.price;
@@ -90,20 +92,16 @@ angular.module('tipntripApp')
 			interests[i] = $scope.user.roles[i].name;
 		};
 		var destinations = $scope.destinations;
-		console.log("interests: " + interests );
-		console.log("destinations: " +destinations);
-		console.log("uid: " + uid + " price: " + price + " title: " + title + " description: " + description);
 		advisorRef.set({
 		    description : description,
 		    price : price,
-		    title : title		    
+		    title : title,		    
 		});	
-		var advisorCountriesRef = $scope.ref.child("advisors-countries").child(uid);
+		var advisorDestinationsRef = $scope.ref.child("advisors-destinations").child(uid);
 		for (var i = $scope.destinations.length - 1; i >= 0; i--) {
 			console.log("Country " + $scope.destinations[i].name)
-			advisorCountriesRef.child($scope.destinations[i].name).set("true");
+			advisorDestinationsRef.child($scope.destinations[i].name).set("true");
 		};
-		
 		var advisorInterestsRef = $scope.ref.child("advisors-interests").child(uid);
 		for (var i = interests.length - 1; i >= 0; i--) {
 			console.log("Interests " + interests[i])

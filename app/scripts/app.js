@@ -19,6 +19,6 @@ angular.module('tipntripApp', [
     'firebase.ref',
     'firebase.auth',
     'ui.bootstrap',
-    'ui.router',
     'checklist-model',
+    'mgo-angular-wizard',
   ]);

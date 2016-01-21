@@ -11,6 +11,7 @@
       <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
       <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -25,47 +26,103 @@
 
     <!-- Add your site or application content here -->
       <!-- Add your site or application content here -->
-      <div class="header" ng-cloak="">
-        <div class="navbar navbar-default" role="navigation">
-          <div class="container">
+     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
             <div class="navbar-header">
-
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="#/">chat</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" ui-sref="app.step1">Tip&Trip</a>
             </div>
-
-            <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="#/">Home</a></li>
-                <!-- //angularfire -->
-                <li><a ng-href="#/chat">chat</a></li>
-                <li>
-                  <a ng-hide-auth="" href="#/login">log in</a>
-                  <a ng-show-auth="" href="#/account">account</a>
-                </li>
-
-              </ul>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a ui-sref="app.step1"><span class="glyphicon glyphicon-home"aria-hidden="true"></span>Home</a></li>
+                    <li><a ui-sref="app.step1"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Relationships</a></li>
+                    <li><a ui-sref="app.step1"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Dashboard</a></li>
+                    <li><a ui-sref="app.step1"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Profile</a></l>
+                    <li><a ui-sref="advisor_register"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Become an Advisor</a></li>
+                    <li><a ui-sref="find.step1"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Account</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li>
+                        <a ui-sref="login" ng-show="!isCurrent">
+                            <span class="glyphicon glyphicon-home"
+                            aria-hidden="true"></span> Login </a>
+                        </li>
+                        <li><a ui-sref="signin" ng-show="!isCurrent">
+                            <span class="glyphicon glyphicon-info-sign"
+                            aria-hidden="true"></span> Register</a>
+                        </li>
+                        <li><a ui-sref="app.step1" ng-show="isCurrent">
+                            <span class="glyphicon glyphicon-info-sign"
+                            aria-hidden="true"></span> {{email}}</a>
+                        </li>
+                        <li><a ui-sref="app.step1" ng-show="isCurrent" ng-click="logout()">
+                            <span class="glyphicon glyphicon-info-sign"
+                            aria-hidden="true"></span> Logout</a>
+                        </li>                            
+                    </ul>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
+        </nav>         
+
+        <header class="jumbotron">
+            <div class="container">
+                <div class="row row-header row-center">
+                    <div>
+                        <h1>Tip&Trip</h1>
+                        <p style="padding:10px;"></p>
+                        <p>Travel like you like</p>
+                    </div>
+                </div>
+            </div>
+        </header>
 
       <div class="container">
         <div ng-view=""></div>
       </div>
 
-      <div class="footer">
-        <div class="container">
-          <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team and Firebase</p>
-        </div>
-      </div>
+      <footer class="row-footer">
+            <div class="container">
+                <div class="row">             
+                    <div class="col-xs-5 col-xs-offset-1 col-sm-2 col-sm-offset-1">
+                        <h5>Links</h5>
+                <ul class="list-unstyled">
+                            <li><a ui-sref="app">Home</a></li>
+                            <li><a ui-sref="app.aboutus">About</a></li>
+                            <li><a ui-sref="app.contactus">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-5">
+                        <h5>Our Address</h5>
+                        <address>
+                          Tel Aviv <br>
+                          <i class="fa fa-phone"></i>: +972 524541543<br>
+                          <i class="fa fa-envelope"></i>: 
+                             <a href="mailto:arnon@tipandtrip.com">
+                             arnon@tipandtrip.com</a>
+                        </address>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="nav navbar-nav" style="padding: 40px 10px;">
+                            <a class="btn btn-social-icon btn-google-plus" href="http://google.com/+"><i class="fa fa-google-plus"></i></a>
+                            <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fa fa-facebook"></i></a>
+                            <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin"></i></a>
+                            <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter"></i></a>
+                            <a class="btn btn-social-icon btn-youtube" href="http://youtube.com/"><i class="fa fa-youtube"></i></a>
+                            <a class="btn btn-social-icon" href="mailto:"><i class="fa fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <p style="padding:10px;"></p>
+                        <p align=center>© Copyright 2015 TipnTrip</p>
+                    </div>
+                </div>
+            </div>
+        </footer> 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -91,9 +148,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
+    <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/checklist-model/checklist-model.js"></script>
     <!-- endbower -->

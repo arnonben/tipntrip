@@ -58,8 +58,8 @@ angular.module('tipntripApp')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/find.html',
+        controller: 'SearchCtrl'
       })
 
       .when('/chat', {

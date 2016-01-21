@@ -6,8 +6,8 @@
   margin: 0px auto;
   padding: 50px 0px;
   border-bottom: 1px ridge;
-  min-height: 400px;
-  max-height: 400px;
+  min-height: 300;
+  max-height: 300px;
 }
 
 .row-small-content {
@@ -189,4 +189,80 @@ ul.rating {
 }
 .rating .filled {
     color: red;
+}
+
+.btn-right {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-right span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-right span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn-right:hover span {
+  padding-right: 25px;
+}
+
+.btn-right span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.btn-left {
+    background-color: #4CAF50; /* Green */
+    border: 1px solid green;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-left span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn-left span:after {
+  content: '<<';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn-left:hover span {
+  padding-left: 25px;
+}
+
+.btn-left span:after {
+  opacity: 1;
+  right: 0;
 }

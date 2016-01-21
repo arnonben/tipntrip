@@ -1,7 +1,7 @@
   <!-- form.html -->
   
 <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-lg-12">
       <div class="row">
         <div class="col-xs-12">
           <ul class="breadcrumb">
@@ -19,6 +19,7 @@
             
             <!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
+            <!--  
             <div id="status-buttons" class="text-center">
                 <a ui-sref-active="active" ui-sref=".step1"><span>1</span> Destinations</a>
                 <a ui-sref-active="active" ui-sref=".step2"><span>2</span> Interests</a>
@@ -26,7 +27,256 @@
                 <a ui-sref-active="active" ui-sref=".step4"><span>4</span> Dates</a>
                 <a ui-sref-active="active" ui-sref=".summary"><span>5</span> Summary</a>
             </div>
+          -->
           </div>  
+          <wizard on-finish="getResults()" name="findAdvisorWizard" edit-mode="true" > 
+              <wz-step title="Destinations">
+                  <!-- Find Advisor step 1 -->
+                <div class="container" >
+                  <form class="form-horizontal" id="loginForm" name="loginForm" novalidate="">  
+                    <div class="row row-content">
+                      <div class="col-xs-12 col-lg-4">
+                        <div class="col-lg-12 row-center">
+                          <h4>Country</h4>
+                        </div>
+                        <div class="form-group row">
+                          <div class="col-lg-12">
+                            <select ng-model="select_country" ng-options="country.name for country in countries track by country.code" style="width: 100%;">
+                              <option value="">-- Select a Country --</option>
+                            </select>
+                            <a  class="btn btn-block btn-info" style="padding-top:5px;" ng-click="addCountry(select_country)">Add Country <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                          </div>
+                        </div>
+                          <div ng-show="showCities">
+                          <div class="col-lg-12 row-center">
+                            <h4>Add city</h4>
+                          </div>
+                          <div class="form-group" ng-show="showCities">
+                            <div class="col-lg-12">
+                              <select ng-model="select_city" style="width: 100%;"  ng-options="city.name for city in currentCountry.cities">
+                                <option value="">-- Select a City ---</option>
+                              </select>
+                              <a  class="btn btn-block btn-info" style="padding-top:5px;" ng-click="addCity(select_city)">Add City <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-4" >
+                        <h4 class="row-center"> Current Destination </h4>
+                        <div ng-show="showCities">
+                          <h5 class="row-center"> {{currentCountry.name}} </h5>
+                          <ul>
+                            <li ng-repeat="city in currentCountry.citiesSelected"> {{city.name}} </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-lg-4">
+                        <h4 class="row-center">My Trip:</h4>
+                        <div class="row">
+                          <ul>
+                            <li ng-repeat="destination in destinationsList">
+                              <h4>{{destination.name}} 
+                                <span ng-show="containCities(destination)">(</span> 
+                                <span ng-repeat="city in destination.citiesSelected"> {{city.name}}  </span> 
+                                <span ng-show="containCities(destination)">)</span> </h4>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row-small-content ">
+                      <div class="col-xs-12 col-lg-4 col-lg-offset-4">
+                        <a  class="btn btn-block btn-info" style="padding-top:5px;" ng-click="addDestination(currentCountry)">Add Destination <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 col-lg-2 col-lg-offset-10">
+                    <a wz-next class="btn btn-right">
+                    <span>Next</span>
+                    </a>
+                  </div> 
+                </div>
+              </wz-step>
+              <wz-step title="Interests">
+                <!-- Find Advisor step 2 -->
+                <div class="container">
+                   <div class="row">
+                    <h3> What are your interests? </h3>
+                  </div>
+                  <form class="form-horizontal" id="step2" name="step2" novalidate="">
+                   <div class="row row-content ">
+                     <div class="col-xs-12 col-lg-8 col-lg-offset-3">
+                      <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
+                       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+                       <h4>{{role.name}}</h4>
+                     </div>
+                     <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
+                       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+                       <h4>{{role.name}}</h4>
+                     </div>
+                     <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
+                       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+                       <h4>{{role.name}}</h4>
+                     </div>
+                    </div>
+                  </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-2">
+                          <a wz-previous class="btn btn-left">
+                          <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                           Previous
+                          </a>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-8">
+                          <a wz-next class="btn btn-right">
+                          Next<span></span>
+                          </a>
+                        </div> 
+                    </div>
+                  </form>
+                </div>
+              </wz-step>
+              <wz-step title="Budget">
+                   <!-- Find Advisor step 3 -->
+                <div class="container">
+                   <div class="row">
+                      <h3> Budget:</h3>
+                   </div>   
+                   <form class="form-horizontal" id="loginForm" name="loginForm" novalidate="">
+                      <div class="row row-content ">
+                         <div class="col-xs-12 col-lg-4 col-lg-offset-4">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" ng-click="setBudget(1)" active>Tight</a>
+                                <a class="btn btn-primary" ng-click="setBudget(2)" >Moderate</a>
+                                <a class="btn btn-primary" ng-click="setBudget(3)" >Comfortable</a>
+                                <a class="btn btn-primary" ng-click="setBudget(4)" >Luxurious</a>
+                            </div>
+                         </div>
+                      </div>
+                        <div class="col-xs-12 col-lg-2">
+                          <a wz-previous class="btn btn-small">
+                          <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                           Previous
+                          </a>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-8">
+                          <a wz-next class="btn btn-small">
+                          Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                          </a>
+                        </div> 
+                   </form>
+
+                </div>
+              </wz-step>
+              <wz-step name="dates">
+                <!-- Find Advisor step 3 -->
+                <div class="container">
+                    <div class="row">
+                      <h3> Dates:</h3>
+                      <div class="row row-content ">
+                       <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+                        <div class="row row-center">
+                            <div class="col-xs-12 col-lg-2 col-lg-offset-3">
+                                <h3> Depart </h3>
+                            </div>
+                            <div class="col-xs-12 col-lg-2 col-lg-offset-2">
+                                <h3> Return </h3>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-lg-4 col-lg-offset-2">
+                                <uib-datepicker ng-model="date_depart2" min-date="date_depart" show-weeks="true" class="well well-sm"></uib-datepicker>
+                            </div>
+                            <div class="col-xs-12 col-lg-4">
+                                <uib-datepicker ng-model="date_return2" min-date="date_depart" show-weeks="true" class="well well-sm"></uib-datepicker>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                        <div class="col-xs-12 col-lg-2">
+                          <a wz-previous class="btn btn-small">
+                          <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                           Previous
+                          </a>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-8">
+                          <a wz-next class="btn btn-small">
+                          Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                          </a>
+                        </div> 
+                  </div>
+                </div> 
+              </wz-step>
+              <wz-step name="summary">
+                <!-- Find Advisor step 4 -->
+                <div class="container">
+                  <div class="row">
+                    <h3> Summary:</h3>
+                  </div>
+                  <hr>
+                  <div class="row row-content">
+                    <div class="row row-cneter col-lg-offset-4">
+                      <h4> Destinations:  </h4>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-offset-4">
+                        <ul>
+                          <li ng-repeat="destination in destinationsList">
+                            <h4>{{destination.name}} 
+                              <span ng-show="containCities(destination)">(</span> 
+                              <span ng-repeat="city in destination.citiesSelected"> {{city.name}}  </span> 
+                              <span ng-show="containCities(destination)">)</span> </h4>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-offset-4">
+                      <h4>Interests: </h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-offset-4">
+                        <ul>
+                          <div ng-repeat="interest in user.roles">
+                            <li>{{interest.name}}</li>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-offset-4">
+                      <h4>Budget: {{budget}}</h4>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-offset-4">
+                      <h4>Dates</h4>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-2">
+                          <a wz-previous class="btn btn-small">
+                          Previous<span class="glyphicon glyphicon-circle-arrow-left"></span>
+                          </a>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-10">
+                          <a wz-finish class="btn btn-small">
+                          Find Advisor<span class="glyphicon glyphicon-circle-arrow-right"></span>
+                          </a>
+                        </div> 
+                    </div> 
+                  </div>
+                </div>
+              </wz-step>
+
+          </wizard>
 
           <div ui-view></div>
         

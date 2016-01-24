@@ -17,7 +17,8 @@ angular.module('chatApp', [
     'ngTouch',
     'firebase',
     'firebase.ref',
-    'firebase.auth'
+    'firebase.auth',
+    'angucomplete-alt'
     ]);
 
 
@@ -47,7 +48,7 @@ angular.module('chatApp').filter('bytes', function() {
 angular.module('chatApp').directive('ngRepeatDirective', function() {
   return function(scope, element, attrs) {
     if (scope.$last){
-      $('.chat-message').scrollTop($('.chat-message')[0].scrollHeight);
+      $(".chat-message").animate({ scrollTop: $('.chat-message').prop("scrollHeight")}, 100);
   }
 }
 });
@@ -58,6 +59,7 @@ angular.module('chatApp').directive('imageOnLoadDirective', function() {
         link: function(scope, element, attrs) {
             element.bind('load', function() {
                 $('.chat-message').scrollTop($('.chat-message')[0].scrollHeight);
+                $(".chat-message").animate({ scrollTop: $('.chat-message').prop("scrollHeight")}, 100);
             });
         }
     };

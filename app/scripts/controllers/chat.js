@@ -113,7 +113,7 @@
   }
 
 
-  $scope.userslist = {hits:{}};
+  $scope.userslist = {};
   $scope.minlength = 2;
   $scope.watchSearchResultInit = false;
   $scope.$broadcast('angucomplete-alt:clearInput');
@@ -124,28 +124,17 @@
     searchService.searchUser('firebase',searchService.buildQuery(term, words))
     .then(function(response){
 
-      $scope.userslist = response;
-      $scope.watchSearchUsers();
-      if(typeof $scope.userslist.hits == "undefined") {
-        $scope.userslist.hits = {};
-      }
-    });
-
-  }
-
-  $scope.watchSearchUsers = function() {
-    $scope.userslist.$watch(function(event){
-      if(typeof $scope.userslist.hits == "undefined") {
-        $scope.userslist.hits = {};
-      }
-      $('angucomplete').blur();
-      $('angucomplete').focus();
-      console.log(event);
+      response.$loaded(function(data){
+        $scope.userslist = data;
+        $('angucomplete').blur();
+        $('angucomplete').focus();
+        console.log('result loaded',data);
+      });
     });
   }
 
   var promise = null;
-  
+
   $scope.inputChangeHandler = function(str) {
     if(str && str.length >= $scope.minlength) {
 
@@ -155,7 +144,7 @@
 
       promise = $timeout(function(){
         $scope.searchUser(str)
-      }, 400);
+      }, 600);
 
     }
   }
@@ -169,9 +158,9 @@
     }
   };
 
-  
 
-  
+
+
 
 
   /* Start New Chat Ends*/
@@ -200,6 +189,9 @@
   }
 
   $scope.newMessage = chatService.initMessage($scope.user.uid);
+
+  // $scope.emojiMessage.messagetext = $scope.emojiMessage.rawhtml = null;
+  $('#messageDiv').html('');
 
 
   $scope.emojiMessage = {};

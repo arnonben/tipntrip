@@ -61,7 +61,10 @@ angular.module('tipntripApp')
         templateUrl: 'views/find.html',
         controller: 'SearchCtrl'
       })
-
+      .when('/results', {
+        templateUrl: 'views/find_results.html',
+        controller: 'ResultsCtrl'
+      })
       .when('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'

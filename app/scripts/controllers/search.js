@@ -12,16 +12,16 @@ angular.module('tipntripApp')
                              'countryFactory',
                              'cityFactory', 
                              'interestsFactory',
-                             'searchAdvisor',
                              '$firebaseAuth',
                              '$firebaseArray', 
+                             '$location',
                              function($scope, 
                                       countryFactory,
                                       cityFactory,
                                       interestsFactory,
-                                      searchAdvisor,
                                       $firebaseAuth,
-                                      $firebaseArray) {
+                                      $firebaseArray,
+                                      $location) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -149,12 +149,51 @@ angular.module('tipntripApp')
     $scope.date_return = new Date();
     $scope.date_return.setDate($scope.date_return.getDate() + 1);
 
-    $scope.fillSearchAdvisor = function(){
-        searchAdvisor.setCountries($scope.destinationsList);
-        searchAdvisor.setInterests($scope.user.roles);
-        searchAdvisor.setBudget($scope.budget);
-        searchAdvisor.setDates($scope.date_depart,$scope.date_return);
-        console.log(searchAdvisor);
-    }
+    /*
+    Results
+    */
+
+        /*
+    Retrieve data from Firebase db based on the search fields: Foar the moment will be only
+    countries
+    */
+    $scope.advisors = [
+        {
+            first_name: "Arnon",
+            last_name: "Benshahar",
+            title: "Best guide in the middle east",
+            price: 50,
+            interests:["Museums","Nature","Beaches"],
+            countries: ["Jordan","Israel","China"],
+            description: "I will give the best trip you can imagine please select me.",
+            image: "/images/arnon.jpg",
+            reviews: 0,
+            rate: 4
+        },
+        {
+            first_name: "Ben",
+            last_name: "Eshel",
+            title: "Best guide in the middle east",
+            price: 30,
+            interests:["Museums","Nature","Beaches"],
+            countries: ["Jordan","Israel","China"],
+            description: "I will give the best trip you can imagine please select me.",
+            image: "/images/beneshel.jpg",
+            reviews: 0,
+            rate: 3
+        }
+
+    ];
+    $scope.ratings = [{
+        current: 5,
+        max: 10
+    }, {
+        current: 3,
+        max: 5
+    }];
+
+    $scope.getResults = function(){
+        $location.path('/results')
+    };
 
   }]);

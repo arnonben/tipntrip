@@ -73,7 +73,7 @@ angular.module('tipntripApp')
   
 
     function redirect() {
-      $location.path('/account');
+      $location.path('/');
     }
 
     function showError(err) {

@@ -283,36 +283,6 @@ livereload: {
 //        }]
 //      }
 //    },
-<<<<<<< HEAD
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
-    htmlmin: {
-      dist: {
-        options: {
-          collapseWhitespace: true,
-          conservativeCollapse: true,
-          collapseBooleanAttributes: true,
-          removeCommentsFromCDATA: true,
-          removeOptionalTags: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-=======
-
 svgmin: {
   dist: {
     files: [{
@@ -332,7 +302,6 @@ htmlmin: {
       collapseBooleanAttributes: true,
       removeCommentsFromCDATA: true,
       removeOptionalTags: true
->>>>>>> a6924c1b0f6e6564f64ad46becfcfbc01a0b564b
     },
     files: [{
       expand: true,

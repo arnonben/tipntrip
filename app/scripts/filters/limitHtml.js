@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('chatApp').filter('limitHtml', function() {
+angular.module('tipntripApp').filter('limitHtml', function() {
     return function(text, limit) {
 
         var changedString = String(text).replace(/<[^>]+>/gm, '');

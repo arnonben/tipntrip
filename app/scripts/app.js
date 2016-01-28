@@ -1,14 +1,14 @@
 'use strict';
 
 /**
-* @ngdoc overview
-* @name chatApp
-* @description
-* # chatApp
-*
-* Main module of the application.
-*/
-angular.module('chatApp', [
+ * @ngdoc overview
+ * @name tipntrip2App
+ * @description
+ * # tipntrip2App
+ *
+ * Main module of the application.
+ */
+ angular.module('tipntripApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -20,17 +20,24 @@ angular.module('chatApp', [
     'firebase.auth',
     'angucomplete-alt',
     'ui.bootstrap',
-    'emojiApp'
+    'emojiApp',
+    'checklist-model',
+    'mgo-angular-wizard'
     ]);
 
-
-angular.module('chatApp').config(['$compileProvider',function( $compileProvider ) {   
+ angular.module('tipntripApp')
+ 
+ .config(['$compileProvider',function( $compileProvider ) {   
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|data):/);
-}]);
+}])
+
+ .run(function($rootScope,User) {
+    $rootScope.email = User;
+});
 
 
 
-function ucfirst (str) {
+ function ucfirst (str) {
     // inspired by: http://kevin.vanzonneveld.net
     str += '';
     var f = str.charAt(0).toUpperCase();
@@ -50,3 +57,4 @@ var getIndexIfObjWithOwnAttr = function(array, attr, value) {
 String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+

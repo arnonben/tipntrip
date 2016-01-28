@@ -1,5 +1,5 @@
 {
-  "name": "chat",
+  "name": "tipntrip",
   "version": "0.0.0",
   "dependencies": {},
   "repository": {},
@@ -39,3 +39,4 @@
     "test": "grunt test"
   }
 }
+

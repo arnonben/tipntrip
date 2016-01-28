@@ -53,7 +53,7 @@ var search = function(obj, text) {
 angular.module('chatApp').filter('conversation', function() {
 
 
-   return function(items, word, users) {
+ return function(items, word, users) {
 
 
     if(!word) {

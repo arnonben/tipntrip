@@ -3,7 +3,11 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
+<<<<<<< HEAD
   beforeEach(module('chatApp'));
+=======
+  beforeEach(module('tipntrip2App'));
+>>>>>>> arnon
 
   var MainCtrl,
     scope;

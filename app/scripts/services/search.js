@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('chatApp')
+  .module('tipntripApp')
   .factory('searchService', searchService);
 
   searchService.$inject = ['$firebaseArray', '$firebaseObject', 'firebaseDataService', '$q'];

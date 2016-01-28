@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('chatApp')
+  .module('tipntripApp')
   .factory('userService', userService);
 
   userService.$inject = ['firebaseDataService', 'UserObjectFactory','UserArrayFactory'];
@@ -31,7 +31,7 @@
   
   // now let's create a synchronized array factory that uses our User
   angular
-  .module('chatApp')
+  .module('tipntripApp')
   .factory('UserObjectFactory', function ($firebaseObject, $firebaseUtils) {
     return $firebaseObject.$extend({
         //  Called each time there is an update from the server to update our User data
@@ -62,7 +62,7 @@
   });
 
   // now let's create a synchronized array factory that uses our Widget
-  angular.module('chatApp').factory("UserArrayFactory", function($firebaseArray, User) {
+  angular.module('tipntripApp').factory("UserArrayFactory", function($firebaseArray, User) {
     return $firebaseArray.$extend({
     // change the added behavior to return User objects
     $$added: function(snap) {
@@ -85,7 +85,7 @@
 
 
   // an object to return in our UserFactory
-  angular.module('chatApp').factory("User", function($firebaseUtils) {
+  angular.module('tipntripApp').factory("User", function($firebaseUtils) {
     function User(snapshot) {
       // store the record id so AngularFire can identify it
       this.$id = snapshot.key();

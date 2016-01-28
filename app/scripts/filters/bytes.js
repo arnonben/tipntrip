@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('chatApp').filter('bytes', function() {
+angular.module('tipntripApp').filter('bytes', function() {
 	return function(bytes, precision) {
 		if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
 		if (typeof precision === 'undefined') precision = 1;

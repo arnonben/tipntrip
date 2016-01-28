@@ -1,8 +1,7 @@
-# FireChat
+# tipntrip
 
 This project is generated with [yo angularfire generator](https://github.com/yeoman/generator-angular)
 version 1.0.0.
-
 
 ## Build & development
 

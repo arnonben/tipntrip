@@ -1,0 +1,59 @@
+<!-- Find Advisor step 1 -->
+<div class="container">
+	<div class="row">
+		<h3> Become an Advisor </h3>
+	</div>
+	<form class="form-horizontal" id="registerAdvisor" name="registerAdivsor" novalidate="" ng-submit="createAdvisor()">  
+		<div class="row ">
+			<div class="col-xs-12 col-lg-6 col-lg-offset-3">
+				<div class="row-center">
+					<h4 class="row"> Describe yourself: </h4>
+					<input type="text" class="text-large" placeholder="Profile Title" ng-model="title">
+				</div>
+				<div class="col-lg-12 row-center">
+					<h4>Choose your countries:</h4>
+				</div>
+				<div class="form-group row">
+					<div class="col-lg-12">
+						<select ng-model="select_country" ng-options="country.name for country in countries track by country.code" style="width: 100%;">
+							<option value="">-- Select a Country --</option>
+						</select>
+						<a  class="btn btn-block btn-info" style="padding-top:5px;" ng-click="addDestination(select_country)">Add Country <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+					</div>
+				</div>
+				<div class="col-lg-12 row-center">
+					<h4>Choose your Interests:</h4>
+				</div>
+			    <div class="col-lg-12 row-center">
+				    <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
+				       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+				       <h4>{{role.name}}</h4>
+				    </div>
+				    <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
+				       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+				       <h4>{{role.name}}</h4>
+				    </div>
+				    <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
+				       <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
+				       <h4>{{role.name}}</h4>
+				    </div>
+			    </div>
+			    <h4 class="row-center"> Pick your price ($ per hour) </h4>
+			    <div class="form-group row-center col-lg-12">
+			    	<input type="range" ng-model="price" min="0" max="1000" step="5">
+			    	<h3 class="row-center">{{price}}$</h3>
+				</div>
+				<h4 class="row-center"> Short Description </h4>
+				<div class="form-group row col-lg-12">
+					<textarea ng-model="description" width="100%" rows="4" placeholder="Short description"></textarea>
+				</div>
+				<div class="form-group">
+               		<div class="row-center">
+                  		<button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Become an Advisor</button>
+            	</div>
+
+
+		   </div>
+		</div>
+	</form>
+</div>

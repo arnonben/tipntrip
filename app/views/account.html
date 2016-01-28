@@ -1,18 +1,16 @@
 <div class="row-fluid">
-  <div class="col-md-4">
+  <div class="{{user.provider === 'password'? 'col-md-4' : 'col-md-12'}}">
     <h3>Profile</h3>
+
     <form role="form">
       <p class="form-group">
         <label>Account ID</label>
         <br />{{user.uid}}
       </p>
+
       <p class="form-group">
-      <label>First Name:</label>
-        <input type="text" name="first_name" ng-model="profile.first_name" class="form-control" />
-      </p>
-      <p class="form-group">
-      <label>Last Name:</label>
-        <input type="text" name="last_name" ng-model="profile.last_name" class="form-control" />
+        <label>Name:</label>
+        <input type="text" name="name" ng-model="profile.name" class="form-control" />
       </p>
 
       <p class="form-group">
@@ -20,12 +18,13 @@
         <br />{{profile.email}}
       </p>
     </form>
+
     <p>
       <button role="button" ng-click="logout()" class="btn btn-danger">Log Out</button>
     </p>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4" ng-show="{{user.provider === 'password'}}">
     <form role="form">
       <h3>Change Password</h3>
 
@@ -51,7 +50,7 @@
     </form>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4" ng-show="{{user.provider === 'password'}}">
     <form>
       <h3>Change Email</h3>
 
@@ -68,7 +67,6 @@
       <button class="btn btn-primary" ng-click="changeEmail(pass, newEmail)">update email</button>
     </form>
   </div>
-
 </div>
 <p class="clearfix"></p>
 <div ng-repeat="message in messages" class="alert alert-{{message.type}}">{{message.text}}</div>

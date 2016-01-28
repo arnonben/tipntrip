@@ -1,7 +1,7 @@
 'use strict';
 /**
  * @ngdoc overview
- * @name chatApp:routes
+ * @name tipntripApp:routes
  * @description
  * # routes.js
  *
@@ -27,7 +27,7 @@
  *   }
  *
  */
- angular.module('chatApp')
+ angular.module('tipntripApp')
 
 /**
  * Adds a special `whenAuthenticated` method onto $routeProvider. This special method,
@@ -58,8 +58,8 @@
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
     .when('/', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'views/find.html',
+      controller: 'SearchCtrl'
     })
     .whenAuthenticated('/chat', {
       templateUrl: 'views/chat.html',
@@ -80,6 +80,10 @@
     .whenAuthenticated('/advisors', {
       templateUrl: 'views/advisors.html',
       controller: 'AdvisorsCtrl'
+    })
+    .when('/results', {
+      templateUrl: 'views/find_results.html',
+      controller: 'ResultsCtrl'
     })
     .otherwise({redirectTo: '/'});
   }])

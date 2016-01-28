@@ -16,7 +16,7 @@ module.exports = function(config) {
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "jasmine"
+    "jasmine"
     ],
 
     // list of files / patterns to load in the browser
@@ -37,12 +37,15 @@ module.exports = function(config) {
       'bower_components/angular-emoji-popup/dist/js/emoji.min.js',
       'bower_components/mockfirebase/browser/mockfirebase.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-wizard/dist/angular-wizard.min.js',
+      'bower_components/checklist-model/checklist-model.js',
+
       // endbower
       "app/lib/**/*.js",
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
-    ],
+      ],
 
     // list of files / patterns to exclude
     exclude: [
@@ -60,13 +63,13 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+    "PhantomJS"
     ],
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
-      "karma-jasmine"
+    "karma-phantomjs-launcher",
+    "karma-jasmine"
     ],
 
     // Continuous Integration mode

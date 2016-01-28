@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <h3 class="row-center">Results {{users}}</h3>
+        <div class="row">
+            <div class="tab-content col-lg-10">
+                <ul class="media-list tab-pane fade in active">
+                    <li class="media" ng-repeat="advisor in advisors">
+                        <div class="media-left media-middle">
+        				    <img class="media-object img-thumbnail" ng-src={{advisor.image}} alt="Advisor">
+                        </div>
+                        <div class="media-body">
+                            <div class="col-lg-5 media-cell">
+                                <div class="row">
+                                    <h3 class="media-heading">{{advisor.first_name}} {{advisor.last_name}}
+                                    </h3>
+                                    <div star-rating rating-value="advisor.rate" max="5" >
+                                </div>  
+                                </div>
+                                <div class="row">
+                                    {{advisor.reviews}} reviews.
+                                </div>
+                                <br>
+                                <div class="row">
+                                    {{advisor.description}}
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="col-lg-6">
+                                    <h4>Interests</h4>
+                                    <ul>
+                                        <li ng-repeat="interest in advisor.interests">
+                                            {{interest}}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h4>Countries</h4>
+                                     <ul>
+                                        <li ng-repeat="country in advisor.countries">
+                                            {{country}}
+                                        </li>
+                                    </ul>                                   
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="row-center">
+                                    <span class="badge">{{advisor.price | currency}}</span>
+                                </div>
+                                <h5 class="row-center"><span class="row-center">Per hour </span></h5>
+                                <div class="row" style="text-align:center">
+                                    <button class="btn btn-xs btn-primary btn-results">Contact me</button>
+                                </div>
+                                <div class="row" style="text-align:center">
+                                    <button class="btn btn-xs btn-primary btn-results">My Profile</button>
+                                </div>                              
+                            <div class="row-center">
+                                <!-- Advisor Profile button -->
+                            </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

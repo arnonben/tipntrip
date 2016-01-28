@@ -1,12 +1,12 @@
 /**
  * @ngdoc function
- * @name chatApp.directive:ngShowAuth
+ * @name tipntripApp.directive:ngShowAuth
  * @description
  * # ngShowAuthDirective
  * A directive that shows elements only when user is logged in. It also waits for Auth
  * to be initialized so there is no initial flashing of incorrect state.
  */
- angular.module('chatApp')
+ angular.module('tipntripApp')
  .directive('ngUnreadChatCount', ['$timeout' ,'Auth', 'chatService', 'userService', function ($timeout, Auth, chatService, userService) {
   'use strict';
 

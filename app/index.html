@@ -58,9 +58,8 @@
                         <li><a ng-show-auth="" ng-href="#/">
                              <ng-auth-mail> </ng-auth-mail></a>
                         </li>
-                        <li><a ng-show-auth ng-click="logout()">
-                            <span class="glyphicon glyphicon-info-sign"
-                            aria-hidden="true"></span> Logout</a>
+                        <li><a ng-show-auth ng-href="#/">
+                            <ng-logout></ng-logout></a>
                         </li>                          
                     </ul>
                 </div>
@@ -188,6 +187,7 @@
         <script src="scripts/directives/ngAuthMail.js"></script>
 
         <script src="scripts/routes.js"></script>
+        <script src="scripts/directives/nglogout.js"></script>
         <!-- endbuild -->
 </body>
 </html>

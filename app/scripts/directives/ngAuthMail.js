@@ -14,7 +14,10 @@ angular.module('tipntripApp')
       link: function postLink(scope, element, attrs) {
       },
       controller: function(Auth,$scope){
-      	$scope.username = Auth.$getAuth().password.email;
+      	$scope.authData = Auth.$getAuth();
+      	if($scope.authData){
+	      	$scope.username = $scope.authData.password.email;
+      	}
       }
     };
   }]);

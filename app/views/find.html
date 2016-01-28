@@ -14,7 +14,7 @@
           <hr>
         </div>
         <div id="form-container">
-          <div class="page-header text-center">
+          <div class="page-header row-center">
             <h2>Find your Advisor!</h2>
             
             <!-- the links to our nested states using relative paths -->
@@ -32,7 +32,7 @@
           <wizard on-finish="getResults()" name="findAdvisorWizard" edit-mode="true" > 
               <wz-step title="Destinations">
                   <!-- Find Advisor step 1 -->
-                <div class="container" >
+                <div class="container container-form" >
                   <form class="form-horizontal" id="loginForm" name="loginForm" novalidate="">  
                     <div class="row row-content">
                       <div class="col-xs-12 col-lg-4">
@@ -90,24 +90,26 @@
                       </div>
                     </div>
                   </form>
-                </div>
                 <div class="row">
-                  <div class="col-xs-12 col-lg-2 col-lg-offset-10">
-                    <a wz-next class="btn btn-right">
-                    <span>Next</span>
-                    </a>
+                  <div class="col-xs-12 col-lg-4 col-lg-offset-4">
+                    <div class="col-lg-6 col-lh-offset-3">
+                      <a wz-next class="btn btn-form">
+                        <span>Next</span>
+                      </a>
+                    </div>
                   </div> 
                 </div>
+              </div>
               </wz-step>
               <wz-step title="Interests">
                 <!-- Find Advisor step 2 -->
-                <div class="container">
-                   <div class="row">
+                <div class="container container-form">
+                   <div class="row-center">
                     <h3> What are your interests? </h3>
                   </div>
                   <form class="form-horizontal" id="step2" name="step2" novalidate="">
-                   <div class="row row-content ">
-                     <div class="col-xs-12 col-lg-8 col-lg-offset-3">
+                   <div class="row row-content">
+                     <div class="col-xs-12 col-lg-12 row-center">
                       <div class="col-lg-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
                        <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
                        <h4>{{role.name}}</h4>
@@ -123,14 +125,14 @@
                     </div>
                   </div>
                     <div class="row">
-                        <div class="col-xs-12 col-lg-2">
-                          <a wz-previous class="btn btn-left">
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-3" style="width=30%">
+                          <a wz-previous class="btn btn-form">
                           <span class="glyphicon glyphicon-circle-arrow-left"></span>
                            Previous
                           </a>
                         </div>
-                        <div class="col-xs-12 col-lg-2 col-lg-offset-8">
-                          <a wz-next class="btn btn-right">
+                        <div class="col-xs-12 col-lg-2 col-lg-offset-1">
+                          <a wz-next class="btn btn-form">
                           Next<span></span>
                           </a>
                         </div> 
@@ -156,13 +158,13 @@
                          </div>
                       </div>
                         <div class="col-xs-12 col-lg-2">
-                          <a wz-previous class="btn btn-small">
+                          <a wz-previous class="btn btn-form">
                           <span class="glyphicon glyphicon-circle-arrow-left"></span>
                            Previous
                           </a>
                         </div>
                         <div class="col-xs-12 col-lg-2 col-lg-offset-8">
-                          <a wz-next class="btn btn-small">
+                          <a wz-next class="btn btn-form">
                           Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
                           </a>
                         </div> 
@@ -197,13 +199,13 @@
                       </div>
                     </div>
                         <div class="col-xs-12 col-lg-2">
-                          <a wz-previous class="btn btn-small">
+                          <a wz-previous class="btn btn-form">
                           <span class="glyphicon glyphicon-circle-arrow-left"></span>
                            Previous
                           </a>
                         </div>
                         <div class="col-xs-12 col-lg-2 col-lg-offset-8">
-                          <a wz-next class="btn btn-small">
+                          <a wz-next class="btn btn-form">
                           Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
                           </a>
                         </div> 
@@ -262,12 +264,12 @@
                   <div class="row">
                     <div class="row">
                         <div class="col-xs-12 col-lg-2">
-                          <a wz-previous class="btn btn-small">
+                          <a wz-previous class="btn btn-form">
                           Previous<span class="glyphicon glyphicon-circle-arrow-left"></span>
                           </a>
                         </div>
                         <div class="col-xs-12 col-lg-2 col-lg-offset-10">
-                          <a wz-finish class="btn btn-small">
+                          <a wz-finish class="btn btn-form">
                           Find Advisor<span class="glyphicon glyphicon-circle-arrow-right"></span>
                           </a>
                         </div> 

@@ -7,13 +7,12 @@
   padding: 50px 0px;
   border-bottom: 1px ridge;
   min-height: 300;
-  max-height: 300px;
+  max-height: 350px;
 }
 
 .row-small-content {
   margin: 0px auto;
   padding: 10px 0px;
-  min-height: 120px;
 }
 
 .row-tiny-content {
@@ -191,78 +190,35 @@ ul.rating {
     color: red;
 }
 
-.btn-right {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    float: left;
-}
-
-.btn-right span {
+.btn-form  {
+  width: 120px;
+  background: #27AE60;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
   cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
+  padding: 10px 5px;
+  margin: 10px 5px;
 }
 
-.btn-right span:after {
-  content: '»';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
+.btn-form:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 
-.btn-right:hover span {
-  padding-right: 25px;
+.container-form {
+  background: white;
+  border: 0 none;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  padding: 10px 10px;
+  
+  box-sizing: border-box;
+  width: 50%;
 }
 
-.btn-right span:after {
-  opacity: 1;
-  right: 0;
+@media (min-width: 1200px)
+.col-lg-4 {
+    width: 10%;
 }
 
-.btn-left {
-    background-color: #4CAF50; /* Green */
-    border: 1px solid green;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    float: left;
-}
-
-.btn-left span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.btn-left span:after {
-  content: '<<';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.btn-left:hover span {
-  padding-left: 25px;
-}
-
-.btn-left span:after {
-  opacity: 1;
-  right: 0;
-}

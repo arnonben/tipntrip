@@ -209,7 +209,6 @@ ul.rating {
   display: inline-block;
   position: relative;
   transition: 0.5s;
-  width=100px,
 }
 
 .btn-right span:after {

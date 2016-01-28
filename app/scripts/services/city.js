@@ -2,22 +2,21 @@
 
 /**
  * @ngdoc service
- * @name tipntrip2App.city
+ * @name tipntrip2App.cityFactory
  * @description
- * # city
+ * # cityFactory
  * Factory in the tipntrip2App.
  */
 angular.module('tipntripApp')
-  .factory('city', function () {
+  .factory('cityFactory', function () {
     // Service logic
     // ...
 
-    var meaningOfLife = 42;
-
     // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
+      getCities: function (country_name) {
+        var cities = [{name:'Paris'},{name:'London'}];
+        return cities;
       }
     };
   });

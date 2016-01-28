@@ -10,15 +10,17 @@
 angular.module('tipntripApp')
   .controller('SearchCtrl', ['$scope', 
                              'countryFactory',
-                             'cityFactory', 
                              'interestsFactory',
+                             'cityFactory',
+                             'searchAdvisor',
                              '$firebaseAuth',
                              '$firebaseArray', 
                              '$location',
                              function($scope, 
                                       countryFactory,
-                                      cityFactory,
                                       interestsFactory,
+                                      cityFactory,
+                                      searchAdvisor,
                                       $firebaseAuth,
                                       $firebaseArray,
                                       $location) {
@@ -193,6 +195,7 @@ angular.module('tipntripApp')
     }];
 
     $scope.getResults = function(){
+        searchAdvisor.setCountries($scope.destinationsList);
         $location.path('/results')
     };
 

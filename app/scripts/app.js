@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
- angular.module('tipntripApp', [
+angular.module('tipntripApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -23,30 +23,30 @@
     'emojiApp',
     'checklist-model',
     'mgo-angular-wizard'
-    ]);
+]);
 
- angular.module('tipntripApp')
- 
- .config(['$compileProvider',function( $compileProvider ) {   
-    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|data):/);
-}])
+angular.module('tipntripApp')
 
- .run(function($rootScope,User) {
-    $rootScope.email = User;
-});
+        .config(['$compileProvider', function ($compileProvider) {
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|data):/);
+            }])
+
+        .run(function ($rootScope) {
+//            $rootScope.email = User;
+        });
 
 
 
- function ucfirst (str) {
+function ucfirst(str) {
     // inspired by: http://kevin.vanzonneveld.net
     str += '';
     var f = str.charAt(0).toUpperCase();
     return f + str.substr(1);
 }
 
-var getIndexIfObjWithOwnAttr = function(array, attr, value) {
-    for(var i = 0; i < array.length; i++) {
-        if(array[i].hasOwnProperty(attr) && array[i][attr] === value) {
+var getIndexIfObjWithOwnAttr = function (array, attr, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].hasOwnProperty(attr) && array[i][attr] === value) {
             return i;
         }
     }
@@ -54,7 +54,7 @@ var getIndexIfObjWithOwnAttr = function(array, attr, value) {
 }
 
 
-String.prototype.capitalizeFirstLetter = function() {
+String.prototype.capitalizeFirstLetter = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 

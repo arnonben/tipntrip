@@ -1,127 +1,127 @@
 .row-header {
-  margin: 0px auto;
-  padding: 0px 0px;
+    margin: 0px auto;
+    padding: 0px 0px;
 }
 .row-content {
-  margin: 0px auto;
-  padding: 50px 0px;
-  border-bottom: 1px ridge;
-  min-height: 300;
-  max-height: 350px;
+    margin: 0px auto;
+    padding: 50px 0px;
+    border-bottom: 1px ridge;
+    min-height: 300;
+    max-height: 350px;
 }
 
 .row-small-content {
-  margin: 0px auto;
-  padding: 10px 0px;
+    margin: 0px auto;
+    padding: 10px 0px;
 }
 
 .row-tiny-content {
-  margin: 0px auto;
-  padding: 10px 0px;
-  min-height: 80px;
+    margin: 0px auto;
+    padding: 10px 0px;
+    min-height: 80px;
 }
 
 .row-icon-content {
-  margin: 0px auto;
-  padding: 5px 0px;
-  min-height: 80px;
+    margin: 0px auto;
+    padding: 5px 0px;
+    min-height: 80px;
 }
 
 .row-center {
-  text-align: center;
+    text-align: center;
 }
 .row-footer {
-  margin: 0px auto;
-  padding: 20px 0px;
-  background-color: #AfAfAf;
+    margin: 0px auto;
+    padding: 20px 0px;
+    background-color: #AfAfAf;
 }
 .jumbotron {
-  margin: 0px auto;
-  padding: 70px 30px;
-  background: #7986CB;
-  color: floralwhite;
+    margin: 0px auto;
+    padding: 70px 30px;
+    background: #7986CB;
+    color: floralwhite;
 }
 .carousel {
-  background: #1a237e;
+    background: #1a237e;
 }
 .carousel .item {
-  height: 300px;
+    height: 300px;
 }
 .carousel .item img {
-  left: 0;
-  min-height: 300px;
-  position: absolute;
-  top: 0;
+    left: 0;
+    min-height: 300px;
+    position: absolute;
+    top: 0;
 }
 
 .img-thumbnail {
-  width: 150px;
-  height: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 .navbar-inverse {
-  background: #303f9f;
-  color: #ffffff;
+    background: #303f9f;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a:hover {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .active > a:focus {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .open > a {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .open > a:hover {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav > .open > a:focus {
-  background: #1a237e;
-  color: #ffffff;
+    background: #1a237e;
+    color: #ffffff;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-  background-color: #303f9f;
-  color: #eeeeee;
+    background-color: #303f9f;
+    color: #eeeeee;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover {
-  color: #000000;
+    color: #000000;
 }
 .navbar-inverse .navbar-nav .open .dropdown-menu {
-  background-color: #303f9f;
-  color: #eeeeee;
+    background-color: #303f9f;
+    color: #eeeeee;
 }
 address {
-  color: #0f0f0f;
-  font-size: 80%;
-  margin: 0px;
+    color: #0f0f0f;
+    font-size: 80%;
+    margin: 0px;
 }
 body {
-  align: center;
-  padding: 50px 0px 0px 0px;
-  z-index: 0;
+    align: center;
+    padding: 50px 0px 0px 0px;
+    z-index: 0;
 }
 .tab-content {
-  border-bottom: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
-  padding: 10px;
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    padding: 10px;
 }
 .affix {
-  top: 100px;
+    top: 100px;
 }
 
 #carouselButtons {
-  bottom: 0px;
-  position: absolute;
-  right: 0px;
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
 }
 
 
@@ -132,42 +132,42 @@ body {
 
 /* we will style the span as the circled number */
 #status-buttons span            { background:#60EF86; display:block; height:30px; margin:0 auto 10px; padding-top:5px; width:30px; 
-    border-radius:50%; }
+                                  border-radius:50%; }
 
 /* active buttons turn light green-blue*/
 #status-buttons a.active span   { background:#00BC8C; }
 
 .animate
 {
-	transition: all 0.1s;
-	-webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
 }
 
 .text-large{
-  font-size: 150%;
-  width: 100%;
+    font-size: 150%;
+    width: 100%;
 }
 
 textarea {
-     width: 100%;
-     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-     box-sizing: border-box;         /* Opera/IE 8+ */
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
 .btn-results{
-  width:100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
+    width:100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 
 }
 
 .media{
-  border: 2px solid black;
+    border: 2px solid black;
 }
 
 .media-cell{
-  height: 400%; 
+    height: 400%; 
 }
 
 .rating {
@@ -191,34 +191,34 @@ ul.rating {
 }
 
 .btn-form  {
-  width: 120px;
-  background: #27AE60;
-  font-weight: bold;
-  color: white;
-  border: 0 none;
-  border-radius: 1px;
-  cursor: pointer;
-  padding: 10px 5px;
-  margin: 10px 5px;
+    width: 120px;
+    background: #27AE60;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
 }
 
 .btn-form:hover {
-  box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 
 .container-form {
-  background: white;
-  border: 0 none;
-  border-radius: 3px;
-  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-  padding: 10px 10px;
-  
-  box-sizing: border-box;
-  width: 50%;
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 10px 10px;
+
+    box-sizing: border-box;
+    width: 50%;
 }
 
-@media (min-width: 1200px)
-.col-lg-4 {
-    width: 10%;
+@media (min-width: 1200px) {
+    .col-lg-4 {
+        /*width: 10%;*/
+    }
 }
-

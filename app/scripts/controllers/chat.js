@@ -32,7 +32,7 @@
   /* load Profile to set EnterToSend button value */
   var profile = $firebaseObject(Ref.child('users/'+user.uid));
   profile.$bindTo($scope, 'profile');
-
+  
 
   /* Firebase USER actions ends*/
 

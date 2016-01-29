@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('chatApp')
+  .module('tipntripApp')
   .factory('firebaseDataService', firebaseDataService);
 
   firebaseDataService.$inject = ['FBURL'];

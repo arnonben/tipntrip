@@ -1,11 +1,11 @@
 'use strict';
 /**
  * @ngdoc function
- * @name chatApp.controller:ChatCtrl
+ * @name tipntripApp.controller:ChatCtrl
  * @description
  * # ChatCtrl
  */
- angular.module('chatApp')
+ angular.module('tipntripApp')
  .controller('ChatCtrl', function ($scope, user, Ref, $q, $firebaseArray, $firebaseObject, $timeout, chatService, userService, searchService, $routeParams) {
 
 
@@ -212,3 +212,4 @@
  };
 
 });
+

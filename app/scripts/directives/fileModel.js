@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('chatApp').directive('fileModel', ['$parse', function ($parse) {
+angular.module('tipntripApp').directive('fileModel', ['$parse', function ($parse) {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {

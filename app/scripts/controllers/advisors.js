@@ -5,7 +5,7 @@
  * @description
  * # AdvisorsCtrl
  */
- angular.module('chatApp')
+ angular.module('tipntripApp')
  .controller('AdvisorsCtrl', function ($scope, user,  $uibModal, userService) {
 
   /* user from the route resolve, contains logged in users' data */
@@ -53,7 +53,7 @@
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $uibModal service used above.
 
-angular.module('chatApp').controller('AdvisorChatModalCtrl', function ($scope, $timeout, $uibModalInstance, chatService, user, advisor) {
+angular.module('tipntripApp').controller('AdvisorChatModalCtrl', function ($scope, $timeout, $uibModalInstance, chatService, user, advisor) {
 
   $scope.advisor = advisor;
   $scope.newMessage = chatService.initMessage(user.uid);

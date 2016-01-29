@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('chatApp').directive('imageOnLoadDirective', function() {
+angular.module('tipntripApp').directive('imageOnLoadDirective', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {

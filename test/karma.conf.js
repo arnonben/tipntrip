@@ -35,11 +35,11 @@ module.exports = function(config) {
       'bower_components/angular-touch/angular-touch.js',
       'bower_components/angular-emoji-popup/dist/js/config.js',
       'bower_components/angular-emoji-popup/dist/js/emoji.min.js',
+      'bower_components/angular-wizard/dist/angular-wizard.min.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/checklist-model/checklist-model.js',
       'bower_components/mockfirebase/browser/mockfirebase.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-wizard/dist/angular-wizard.min.js',
-      'bower_components/checklist-model/checklist-model.js',
-
       // endbower
       "app/lib/**/*.js",
       "app/scripts/**/*.js",

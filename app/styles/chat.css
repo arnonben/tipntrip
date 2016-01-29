@@ -16,6 +16,11 @@ html,body
 
 }
 
+.chat-wrapper .media 
+{
+    border:none;
+}
+
 
 .chat-wrapper .col-lg-4, .chat-wrapper .col-lg-8
 {
@@ -220,7 +225,7 @@ html,body
 }
 
 ::-webkit-scrollbar-track {
-	background: #b8c0c8;
+	/*background: #b8c0c8;*/
 }
 
 body {

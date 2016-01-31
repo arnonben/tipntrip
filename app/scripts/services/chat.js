@@ -149,7 +149,6 @@
                         }
 
                 function updateModifiedAt(chat_id, message) {
-                    console.log(message);
                     var lastMessage = {
                         text: null,
                         type: null,

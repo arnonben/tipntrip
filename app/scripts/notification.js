@@ -26,7 +26,6 @@ function SaveDataToLocalStorage(data)
         return false;
     }
 
-    console.log(a);
     // Push the new data (whether it be an object or anything else) onto the array
     a.push(data);
     // Re-serialize the array back into a string and store it in localStorage

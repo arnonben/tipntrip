@@ -1,29 +1,36 @@
 {
-  "name": "tipntrip",
-  "version": "0.0.0",
-  "dependencies": {
-    "angular": "^1.3.0",
-    "firebase": "2.2.2",
-    "angularfire": "1.0.0",
-    "bootstrap": "^3.2.0",
-    "angular-animate": "^1.3.0",
-    "angular-cookies": "^1.3.0",
-    "angular-resource": "^1.3.0",
-    "angular-route": "^1.3.0",
-    "angular-sanitize": "^1.3.0",
-    "angular-touch": "^1.3.0",
-    "font-awesome": "~4.5.0",
-    "angular-emoji-popup": "~1.1.0",
-    "angular-wizard": "~0.6.1",
-    "ui.bootstrap": "~1.0.3",
-    "angular-bootstrap": "~1.0.3",
-    "checklist-model": "~0.9.0"
-  },
-  "devDependencies": {
-    "mockfirebase": "0.11.0",
-    "angular-mocks": "^1.3.0"
-  },
-  "appPath": "app",
-  "directory": "app/",
-  "moduleName": "tipntripApp"
+    "name": "tipntrip",
+    "version": "0.0.0",
+    "dependencies": {
+        "angular": "^1.3.0",
+        "firebase": "2.2.2",
+        "angularfire": "1.0.0",
+        "bootstrap": "3.3.2",
+        "angular-animate": "^1.3.0",
+        "angular-cookies": "^1.3.0",
+        "angular-resource": "^1.3.0",
+        "angular-route": "^1.3.0",
+        "angular-sanitize": "^1.3.0",
+        "angular-touch": "^1.3.0",
+        "font-awesome": "~4.5.0",
+        "angular-emoji-popup": "~1.1.0",
+        "angular-wizard": "~0.6.1",
+        "ui.bootstrap": "~1.0.3",
+        "angular-bootstrap": "~1.0.3",
+        "checklist-model": "~0.9.0"
+    },
+    "devDependencies": {
+        "mockfirebase": "0.11.0",
+        "angular-mocks": "^1.3.0"
+    },
+    "overrides": {
+        "font-awesome": {
+            "main": [
+                "css/font-awesome.css"
+            ]
+        }
+    },
+    "appPath": "app",
+    "directory": "app/",
+    "moduleName": "tipntripApp"
 }

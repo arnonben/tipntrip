@@ -16,11 +16,11 @@
                 </header>
 
                 <div class="chat-list">
-                    <div ng-repeat="chat in chats| conversation:search:users | reverse " ng-click="$parent.selectChat(chat.$id);" ng-class="{'selected':$parent.selected == chat.$id}" ng-init="$index == 0 && !$parent.selected && $parent.selectChat(chat.$id)" ng-show="users[chat.chatWith].first_name">
+                    <div ng-repeat="chat in chats| conversation:search:users | reverse " ng-click="$parent.selectChat(chat.$id);" ng-class="{'selected':$parent.selected == chat.$id}" ng-init="$index == 0 && !$parent.selected && $parent.selectChat(chat.$id)" ng-show="users[chat.chatWith]._name">
                         <a href="#/chat/{{chat.$id}}">
                             <div class="media chat">
                                 <div class="media-left">
-                                    <img class="media-object chat-author-img" alt="{{users[chat.chatWith]}}" style="width: 35px; height: 35px;" ng-src="{{users[chat.chatWith]._image}}
+                                    <img class="media-object chat-author-img" alt="{{users[chat.chatWith]._name}}" style="width: 35px; height: 35px;" ng-src="{{users[chat.chatWith]._image}}
                                          ">
                                 </div>
                                 <div class="media-body">
@@ -53,7 +53,7 @@
                         <div class="status"  ng-if="selected">
                             <div class="meta">
                                 <div class="meta__name">
-                                    {{ users[getChatWith(selected)] ? users[getChatWith(selected)]._name : getUser(getChatWith(selected))}}
+                                    {{users[getChatWith(selected)]._name}}
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                     {{newMessage.file.name| limitTo:10 }} <i class="fa fa-paperclip"></i>
                                     <input type="file" id="file" name="file" file-model="newMessage.file"/>
                                 </button>
-                                <button id="submitBtn" type="submit" class="text-right btn btn-default" role="button"  ng-click="sendMessage(newMessage, selected)" ng-disabled="!(selected && (newMessage.text || newMessage.file))">
+                                <button id="submitBtn" type="submit" class="text-right btn btn-default" role="button"  ng-click="sendMessage(newMessage, selected)" ng-disabled="!(selected && (emojiMessage.rawhtml || newMessage.file))">
                                     <i class="fa fa-paper-plane-o"></i> Send Message
                                 </button>
                             </div>

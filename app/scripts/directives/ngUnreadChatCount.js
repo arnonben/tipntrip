@@ -7,7 +7,7 @@
  * to be initialized so there is no initial flashing of incorrect state.
  */
 angular.module('tipntripApp')
-        .directive('ngUnreadChatCount', ['$timeout', 'Auth', 'chatService', 'userService', function ($timeout, Auth, chatService, userService) {
+        .directive('ngUnreadChatCount', ['$rootScope', '$timeout', 'Auth', 'chatService', 'userService', function ($rootScope, $timeout, Auth, chatService, userService) {
                 'use strict';
 
                 return {
@@ -50,6 +50,10 @@ angular.module('tipntripApp')
 
                         Auth.$onAuth(update);
                         update();
+
+                        $rootScope.$on('logout', function () {
+                            scope.unreadChat.$destroy();
+                        });
                     }
                 };
             }]);

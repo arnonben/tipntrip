@@ -5,7 +5,7 @@
  * @description
  * # ChatCtrl
  */
-angular.module('tipntripApp').controller('ChatCtrl', function ($scope, user, Ref, $q, $firebaseArray, $firebaseObject, $timeout, chatService, userService, searchService, $routeParams) {
+angular.module('tipntripApp').controller('ChatCtrl', function ($scope, $rootScope, user, Ref, $q, $firebaseArray, $firebaseObject, $timeout, chatService, userService, searchService, $routeParams) {
 
 
 
@@ -15,26 +15,57 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, user, Ref
     $scope.user = user;
 
     /* $scop.users stores information about user's details and used in many place like showing name in chat list and in single chat's message body */
-    $scope.users = [];
+    $scope.users = {};
 
     $scope.getUser = function (uid) {
-        if (typeof $scope.users[uid] == "undefined") {
-            userService.get(uid).$loaded().then(function (user) {
-                $scope.users[user.$id] = angular.extend({}, user);
-            });
+        if (typeof $scope.users[uid] === "undefined") {
+            $scope.users[uid] = userService.get(uid);
         }
-    }
+    };
 
     /* Get loggedIn user ( again )*/
     $scope.getUser($scope.user.uid);
 
-    /* load Profile to set EnterToSend button value */
-    var profile = $firebaseObject(Ref.child('users/' + user.uid));
-    profile.$bindTo($scope, 'profile');
+
+    var unbind;
+    // create a 3-way binding with the user profile object in Firebase
+    var profile = userService.get($scope.user.uid);
+    profile.$bindTo($scope, 'profile').then(function (ub) {
+        unbind = ub;
+    });
+
+    $scope.destroyAll = function () {
+
+
+    }
+
+    $rootScope.$on('logout', function () {
+
+        if (unbind) {
+            unbind();
+        }
+        profile.$destroy();
+
+        angular.forEach($scope.messages, function (value, key) {
+            if (typeof $scope.messages[key] !== 'undefined') {
+                $scope.messages[key].$destroy();
+            }
+        });
+
+        angular.forEach($scope.users, function (value, key) {
+            if (typeof $scope.users[key] !== 'undefined') {
+                $scope.users[key].$destroy();
+            }
+        });
+
+        $scope.chats.$destroy();
+        $scope.selected = null;
+        
+    });
+
 
 
     /* Firebase USER actions ends*/
-
 
     /* Firebase CHAT actions */
 
@@ -45,7 +76,9 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, user, Ref
 
     /* on chat list load fetch all the related details like chat's members, member's user details etc */
     $scope.chats.$watch(function (event) {
-
+        if (event.event == 'child_removed') {
+            return;
+        }
         if ($routeParams.chatId == event.key && event.key != $scope.selected) {
             $scope.selectChat($routeParams.chatId);
         }
@@ -55,9 +88,6 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, user, Ref
         $scope.loadChatDetails(event.key);
     });
 
-    $scope.$on('$destroy', function () {
-        $scope.selected = null;
-    });
 
 
     /* $scope.loadChatDetails updates the $scope.users with chat's user */

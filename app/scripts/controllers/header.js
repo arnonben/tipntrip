@@ -13,6 +13,8 @@
 			$scope.logout = function(){
 				ref.unauth();
 				console.log("logout from");
+                                            $rootScope.$broadcast('logout');
+
 				$scope.isCurrent = false;
 			};
 			

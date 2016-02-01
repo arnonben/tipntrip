@@ -34,11 +34,6 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, $rootScop
         unbind = ub;
     });
 
-    $scope.destroyAll = function () {
-
-
-    }
-
     $rootScope.$on('logout', function () {
 
         if (unbind) {

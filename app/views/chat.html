@@ -150,7 +150,7 @@
                                     {{newMessage.file.name| limitTo:10 }} <i class="fa fa-paperclip"></i>
                                     <input type="file" id="file" name="file" file-model="newMessage.file"/>
                                 </button>
-                                <button id="submitBtn" type="submit" class="text-right btn btn-default" role="button"  ng-click="sendMessage(newMessage, selected)" ng-disabled="!(selected && (emojiMessage.rawhtml || newMessage.file))">
+                                <button id="submitBtn" type="submit" class="text-right btn btn-default" role="button"  ng-click="sendMessage(newMessage, selected)" ng-disabled="!(selected && (emojiMessage.rawhtml || newMessage.text ||newMessage.file))">
                                     <i class="fa fa-paper-plane-o"></i> Send Message
                                 </button>
                             </div>

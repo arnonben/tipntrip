@@ -55,7 +55,7 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, $rootScop
 
         $scope.chats.$destroy();
         $scope.selected = null;
-        
+
     });
 
 
@@ -201,14 +201,10 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, $rootScop
     $scope.newMessage = chatService.initMessage($scope.user.uid);
 
     $scope.emojiMessage = {};
-    $scope.emojiMessage.messagetext = $scope.emojiMessage.rawhtml = null;
-    $('#messageDiv').html('');
-
-
 
 
     $scope.emojiMessage.replyToUser = function () {
-        console.log($scope.newMessage);
+
         if (profile.EnterToSend && $scope.selected && profile.EnterToSend && ($scope.newMessage.text || $scope.newMessage.file)) {
 
             $scope.emojiMessage.messagetext = $scope.emojiMessage.rawhtml = null;
@@ -220,14 +216,25 @@ angular.module('tipntripApp').controller('ChatCtrl', function ($scope, $rootScop
 
     /* To send message to chat */
     $scope.sendMessage = function (newMessage, chat_id) {
-        $scope.emojiMessage.messagetext = $scope.emojiMessage.rawhtml = null;
-        $('#messageDiv').html('');
+
+
         $scope.loading.send = true;
 
+
+        /* clear form values */
         $scope.newMessage = chatService.initMessage($scope.user.uid);
+        
+        var $imageFile = $('#file');
+        $imageFile.val('');
+        
+        $scope.emojiMessage.rawhtml = null;
+        
 
         chatService.sendMessage(newMessage, chat_id).then(function (ref) {
+
             console.log("new message added with id " + ref.key());
+
+
             $scope.loading.send = false;
         }, function (error) {
             alert(error);

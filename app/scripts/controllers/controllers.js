@@ -23,8 +23,9 @@
 
             var indexes= [];
             
+            console.log(userActivity.interest);
             for (var i = 0; i < $scope.roles.length; i++) {
-                if(userActivity.interest[i] === true)
+                if(userActivity.interest[i] != undefined && userActivity.interest[i] === true)
                    indexes.push(i);
             };
             
@@ -35,6 +36,7 @@
             
             dbFirebase.saveActivity(userActivity);
             alert('Activity Added Successfully');
+            $state.go('app.step2');
         }
 
 

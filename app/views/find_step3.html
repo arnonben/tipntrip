@@ -2,88 +2,52 @@
 <div class="page-header">
   <h2>Traveler's Activity Details</h2>
 </div> 
-<div class="container">
-   <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-         <button type="button" class="btn btn-default btn-block btn-lg"><br>Go to Virtual Planner<br><br></button>
-      </div>
+<div class="row">
+   <div class="col-xs-12" style="text-align:center;">
+      <a type="button" class="btn btn-default">Go to Virtual Planner</a>
    </div>
-   <div class="row">
-      <div class="col-xs-4">
-         <h4>Adviser Name</h4>
-         <button class="btn btn-default">Contact Me</button>
-      </div>
-      <div class="col-xs-4">
-         <h4>Trip Title</h4>
-         <h4>Status: <span class="text-warning">Waiting</span></h4>
-      </div>
-      <div class="col-xs-4" style="margin-top:1%;">
-            <button class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </button><br>
-            <button class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
-      </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-4">
+      <h4>Adviser Name</h4>
+      <button class="btn btn-default">Contact Me</button>
    </div>
-   <div class="row">
-      <div class="col-xs-4">
-         <h4>Advise Level</h4>
-      </div>
-      <div class="col-xs-4">
-         <h4>Basic : 100$</h4>
-      </div>
+   <div class="col-xs-4">
+      <h4>Trip Title</h4>
+      <h4>Status: <span class="text-warning">{{activity.status}}</span></h4>
    </div>
-   <div class="row">
-      <div class="col-xs-12">
-         <h4>Destinations:</h4>
-         <h5>
-            <span>Germany</span> 
-            <span>Astria</span>
-         </h5>
-      </div>
+   <div class="col-xs-4" style="margin-top:1%;">
+         <button class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </button><br>
+         <button class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
    </div>
-   <div class="row">
-      <div class="col-xs-12">
-         <h4>Interests:</h4>
-         <h5>
-            <span>Shopping</span>
-            <span>Travelling</span>
-            <span>Art</span>
-         </h5>
-      </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-4">
+      <h4>Advise Level</h4>
    </div>
-   <div class="row">
-      <div class="col-xs-12">
-         <h4>Comments:</h4>
-         <h5>
-            <span>Dummy text Dummy text Dummy text Dummy text Dummy text</span>
-            <span>Dummy text Dummy text Dummy text Dummy text Dummy text</span>
-            <span>Dummy text Dummy text Dummy text Dummy text Dummy text</span>
-            <span>Dummy text Dummy text Dummy text Dummy text Dummy text</span>
-         </h5>
-      </div>
+   <div class="col-xs-4">
+      <h4>Basic : 100$</h4>
    </div>
-   <!-- <div class="row">
-      <h3> Budget:</h3>
-   </div>   
-   <form class="form-horizontal" id="loginForm" name="loginForm" novalidate="">
-      <div class="row row-content ">
-         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-            <div class="col-sm-3"><a class="action-button shadow animate red" ng-click="setBudget(1)">Tight</a></div>
-            <div class="col-sm-3"><a class="action-button shadow animate yellow" ng-click="setBudget(2)">Moderate</a></div>
-            <div class="col-sm-3"><a class="action-button shadow animate green" ng-click="setBudget(3)">Comfortable</a></div>
-            <div class="col-sm-3"><a class="action-button shadow animate blue" ng-click="setBudget(4)">Luxurious</a></div>
-         </div>
-      </div>
-      <div class="row">
-         <div class="col-xs-12 col-sm-2 col-sm-offset-2">
-            <a ui-sref="app.step2" class="btn btn-block btn-info">
-               Previous Section <span class="glyphicon glyphicon-circle-arrow-left"></span>
-            </a>
-         </div>
-         <div class="col-xs-12 col-sm-2 col-sm-offset-3">
-            <a ui-sref="app.step4" class="btn btn-block btn-info">
-            Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-         </a>
-         </div> 
-      </div>
-   </form> -->
-
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-md-6">
+      <h4>Destinations:</h4>
+      <p ng-repeat="country in activity.destination">{{country}}</p><br/> 
+   </div>
+   <div class="col-md-6">
+      <h4>Interests:</h4>
+      <p ng-repeat="interest in activity.interest">{{interest}}</p><br/>
+   </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-12">
+      <h4>Comments:</h4>
+      <h5>
+         <span>{{activity.comment}}</span>
+      </h5>
+   </div>
 </div>

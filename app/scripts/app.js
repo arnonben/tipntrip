@@ -50,13 +50,15 @@ var tripApp = angular
         // url will be /find/step2
         .state('app.step2', {
             url: '/step2',
-            templateUrl: 'views/find_step2.html'
+            templateUrl: 'views/find_step2.html',
+            controller  : 'ListController'
         })
         
         // url will be /find/step3
         .state('app.step3', {
-            url: '/step3',
-            templateUrl: 'views/find_step3.html'
+            url: '/step3/:activityId',
+            templateUrl: 'views/find_step3.html',
+            controller  : 'DetailController'
         })
   
   .state('app.step4', {

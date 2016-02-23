@@ -2,45 +2,39 @@
     'use strict';
     angular.module('tipntrip2App')
     .controller('SearchController', ['$scope','$rootScope','$state','countryFactory', 'interestsFactory','CountriesAndCities','dbFirebase', function($scope, $rootScope, $state, countryFactory, interestsFactory,CountriesAndCities,dbFirebase) {
+        
         $scope.name = 'World';
         $scope.countries = countryFactory.getCountries();
 
         $scope.roles = interestsFactory.getInterestes();
         $scope.countryList = []; 
+
         $scope.removeCountry = function(index){
             console.log(index);
-            // delete $scope.countryList[index];
-            // $scope.list[index] = true;
-            // console.log($scope.countryList);
         };
 
         $scope.saveUserActivity = function(userActivity){
-            //Status can be accepted, new, decline or cancelled.
+           
             userActivity.status = 'new';
-            userActivity.travelerUid = 79;
-            userActivity.adviserUid = 80;
-            if(userActivity.typeOfAdvise == 1)
-                userActivity.chargeAmount = 1000;
-            else if(userActivity.typeOfAdvise == 2)
-                userActivity.chargeAmount = 2000;
-            else if(userActivity.typeOfAdvise == 3)
-                userActivity.chargeAmount = 3000;
+            userActivity.traveler_UID = 79;
+            userActivity.advisor_UID = 80;
             userActivity.title = 'Untitled Trip';
-            userActivity.destinationList = $scope.countryList;
+            userActivity.destination = $scope.countryList;
+
             var indexes= [];
+            
             for (var i = 0; i < $scope.roles.length; i++) {
                 if(userActivity.interest[i] === true)
                    indexes.push(i);
             };
-            //console.log(indexes);
+            
             userActivity.interest = [];
             for (var i = 0; i < indexes.length; i++) {
                 userActivity.interest.push($scope.roles[indexes[i]].name);
             };
-            var response = dbFirebase.saveActivity(userActivity)
-            console.log(response);    
-            //$rootScope.userPlanList.push(userActivity);
-            //$state.go('app.step2');
+            
+            dbFirebase.saveActivity(userActivity);
+            alert('Activity Added Successfully');
         }
 
 
@@ -74,6 +68,26 @@
         };
     }])
 
+    .controller('ListController', ['$scope','$rootScope','$state','dbFirebase', '$firebaseObject', function($scope, $rootScope, $state, dbFirebase, $firebaseObject) {
+
+        var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
+        var activityRef = myDataRef.child("activity");
+
+        $scope.activityList = $firebaseObject(activityRef);
+        
+        console.log($scope.activityList);
+    }])
+
+    .controller('DetailController', ['$scope', '$stateParams', '$rootScope','$state','dbFirebase', '$firebaseObject', function($scope, $rootScope, $stateParams, $state, dbFirebase, $firebaseObject) {
+
+        console.log($stateParams.activityId);
+        var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
+        var activityRef = myDataRef.child("activity").child($stateParams.activityId);
+
+        $scope.activity = $firebaseObject(activityRef);
+        
+        console.log($scope.activity);
+    }])
 
 
     .controller('ResultController', ['$scope', function($scope) {
@@ -107,25 +121,25 @@
         $scope.a = 1;
     }])
 
-        .controller('SigninController' ,['$scope','$firebaseAuth',function($scope,$firebaseAuth){
+    .controller('SigninController' ,['$scope','$firebaseAuth',function($scope,$firebaseAuth){
+        $scope.email = "";
+        $scope.password = "";
+        $scope.SignIn = function(){ 
+            var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+            ref.authWithPassword({
+              email    : $scope.email,
+              password : $scope.password
+            }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+              } else {
+                console.log("Authenticated successfully with payload:", authData);
+              }
+            });
             $scope.email = "";
             $scope.password = "";
-            $scope.SignIn = function(){ 
-                var ref = new Firebase("https://tipandtrip.firebaseio.com/");
-                ref.authWithPassword({
-                  email    : $scope.email,
-                  password : $scope.password
-                }, function(error, authData) {
-                  if (error) {
-                    console.log("Login Failed!", error);
-                  } else {
-                    console.log("Authenticated successfully with payload:", authData);
-                  }
-                });
-                $scope.email = "";
-                $scope.password = "";
-          };
-        }])
+      };
+    }])
 
     .controller('RegisterController', ['$scope', function($scope) {
         $scope.data = 1;

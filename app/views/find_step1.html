@@ -2,75 +2,79 @@
 <div class="page-header text-center">
             <h2>Let's Schedule Your Trip!</h2>
           </div>  
-<div class="container">
+<div class="row">
+	<div class="col-md-12" style="margin:20px 0px;">
 	<form id="loginForm" name="loginForm" novalidate="">  
-		<div class="row row-content">
-		
 		<div class='row'>
-			<div class="col-xs-12 col-sm-4">
-				<h4 class="row">Types of Advising</h4>
+			<div class="col-xs-12 col-md-12">
+				<legend>Types of Advising</legend>
 				<div class="row">
-					<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="1">
-			       		<h6>Basic</h6>
+					<div class="col-md-4 form-group">
+			       		<input type="radio" ng-model="userActivity.charge_amount" ng-value="1">
+			       		<h3>Basic</h3>
+			       		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
 			     	</div>
-			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="2">
-			       		<h6>Intermadiate</h6>
+			     	<div class="col-md-4 form-group">
+			       		<input type="radio" ng-model="userActivity.charge_amount" ng-value="2">
+			       		<h3>Intermadiate</h3>
+			       		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
 			     	</div>
-			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="3" >
-			       		<h6>Express</h6>
+			     	<div class="col-md-4 form-group">
+			       		<input type="radio" ng-model="userActivity.charge_amount" ng-value="3" >
+			       		<h3>Expert</h3>
+			       		<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
 			     	</div>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-4">
-				<h4 class="row">Country</h4>
-				<div class="form-group row">
-					<div class="col-sm-12">
+			<div class="col-xs-12 col-sm-12">
+				<legend>About What?</legend>
+				<h4>Country</h4>
+				<div class="form-group">
+					<div class="col-md-6">
 						<select ng-model="select_country" ng-options="country.name for country in countries track by country.code" style="width: 100%;">
 							<option value="">-- Select a Country --</option>
 						</select>
 						<br><br>
 						<a  class="btn btn-block btn-info" style="padding-top:5px;" ng-click="addCountry(select_country)">Add Country <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
 					</div>
+					<div class="col-xs-12 col-md-6">
+						<h4 class="row-center">My Trip:</h4>
+						<h6 class="row-center" ng-if="countryList.length==0">No Country is Selected</h6>
+						<ul class="list-group" add-country ></ul>
+					</div>
 				</div>
-				<h4 class="row">Interests</h4>
-			   	<div class="row">
+				
+				<h4 class="col-md-12">Interests</h4>
+			   	<div class="form-group">	
 			     	<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
 			       		<input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
-			       		<h6>{{role.name}}</h6>
+			       		<h6 style="display:inline;">{{role.name}}</h6>
 			     	</div>
 			   		<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
 			       		<input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
-			       		<h6>{{role.name}}</h6>
+			       		<h6 style="display:inline;">{{role.name}}</h6>
 			     	</div>
 				    <div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
 					    <input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
-					    <h6>{{role.name}}</h6>
+					    <h6 style="display:inline;">{{role.name}}</h6>
 					</div>
 			   	</div>
-			   	<h4 class="row">Comments</h4>
-			   	<div class="form-group row">
-					<textarea ng-model="userActivity.comment" class="col-sm-12"></textarea>
+			   	
+			   	<h4>Comments</h4>
+			   	<div class="form-group">			   		
+					<textarea ng-model="userActivity.comment" row="20" class="col-sm-12"></textarea>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<h4 class="row-center">My Trip:</h4>
-				<h6 class="row-center" ng-if="countryList.length==0">No Country is Selected</h6>
-				<ul class="list-group" add-country ></ul>
-			</div>
-			<div class="col-sm-2"></div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-4 col-sm-offset-2">
-				<a ng-click="saveUserActivity(userActivity)" class="btn btn-block btn-info">
+			<div class="col-xs-12 col-md-12" style="text-align:center; margin-top:20px;">
+				<a ng-click="saveUserActivity(userActivity)" class="btn btn-info">
 					Lets Schedule <span class="glyphicon glyphicon-circle-arrow-left"></span>
 				</a>
 			</div>
 		</div>
-		</div>
 	</form>
+	</div>
 </div>

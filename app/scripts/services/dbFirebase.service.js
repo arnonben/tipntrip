@@ -1,32 +1,33 @@
 angular.module('tipntrip2App')
 .factory('dbFirebase', function(){
-	var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');	
-	console.log(myDataRef);
-	var activityRef = myDataRef.child("activity");
-	console.log(activityRef);
 	
+	var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');	
+	var activityRef = myDataRef.child("activity");
+	
+	var activityList = [];
+
+	activityRef.on("value", function(snapshot) {
+	 	var activityList = snapshot.val();
+	 	console.log(activityList);
+	});
+
 	var response = {
 		'data': null,
 		'done': false,
 		'message':'failled'
 	};
+
 	return{
 		saveActivity : function(activity){
 			newActivity = activityRef.push();
 			newActivity.set(activity);
-			// response = {
-			// 	'data' : 162127,
-			// 	'done' : true,
-			// 	'message' : 'success',
-			// }
-			
-			return response;
+			return true;
 		},
 		removeActivity : function(){
 
 		},
 		getAllActivities : function(){
-
+			return activityList;
 		}
 	};
 });

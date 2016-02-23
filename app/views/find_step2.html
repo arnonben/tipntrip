@@ -1,98 +1,27 @@
 <!-- Find Advisor step 2 -->
 <div class="page-header">
-  <h2>Traveler's Activities</h2>
+  <h2>Activities</h2>
 </div> 
-<div class="container">
-  <h4 class="row">
-    <span class="col-xs-10">Activities</span>
-  </h4>
-  <div class="row">
+  <div class="row" ng-repeat="(name,activity) in activityList">
     <div class="col-xs-10">
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="row">
             <div class="col-xs-3">
               <h4>Trip Title</h4>
+              <h5>{{activity.title}}</h5>
             </div>
             <div class="col-xs-3">
               <h4>Adivsor Name</h4>
-              <h5 class="text-primary">Username</h5>
+              <h5 class="text-primary">{{activity.title}}</h5>
             </div>
             <div class="col-xs-3">
               <h4>Status</h4>
-              <h5 class="text-success">Accepted</h5>
+              <h5 class="text-success">{{activity.status}}</h5>
             </div>
-            <div class="col-xs-3"><a href="#/app/step3" class="btn btn-default">Go to details</a></div>
+            <div class="col-xs-3"><a href="#/app/step3/{{name}}" class="btn btn-default">Go to details</a></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-10">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-3">
-              <h4>Trip Title</h4>
-            </div>
-            <div class="col-xs-3">
-              <h4>Adivsor Name</h4>
-              <h5 class="text-primary">Username</h5>
-            </div>
-            <div class="col-xs-3">
-              <h4>Status</h4>
-              <h5 class="text-danger">Decline</h5>
-            </div>
-            <div class="col-xs-3"><button type="button" class="btn btn-default">Go to details</button></div>
-          
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-10">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-3">
-              <h4>Trip Title</h4>
-            </div>
-            <div class="col-xs-3">
-              <h4>Adivsor Name</h4>
-              <h5 class="text-primary">Username</h5>
-            </div>
-            <div class="col-xs-3">
-              <h4>Status</h4>
-              <h5 class="text-warning">Pending</h5>
-            </div>
-            <div class="col-xs-3"><button type="button" class="btn btn-default">Go to details</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-10">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-xs-3">
-              <h4>Trip Title</h4>
-            </div>
-            <div class="col-xs-3">
-              <h4>Adivsor Name</h4>
-              <h5 class="text-primary">Username</h5>
-            </div>
-            <div class="col-xs-3">
-              <h4>Status</h4>
-              <h5 class="text-warning">Cancel</h5>
-            </div>
-            <div class="col-xs-3"><button type="button" class="btn btn-default">Go to details</button></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

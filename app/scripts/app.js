@@ -20,7 +20,7 @@ angular
         .state('app', {
             url: '/app',
             controller: 'findController',
-            views: {
+            views:{
                     'header': {
                         templateUrl : 'views/header.html',
                     },
@@ -28,10 +28,10 @@ angular
                         templateUrl : 'views/find.html',
                         controller  : 'SearchController'
                     },
-        'footer': {
-      templateUrl : 'views/footer.html',
-        }
-                }
+                    'footer': {
+                      templateUrl : 'views/footer.html',
+                    }
+            }
         })
         
         

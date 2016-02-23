@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tipntrip2App')
-        .factory('countryFactory', [function() {
+    .factory('countryFactory', [function() {
     
             var countryfac = {};
                          
@@ -256,4 +256,15 @@ angular.module('tipntrip2App')
           
 	  return countryfac;                    
 
-}]);
+	}])
+	
+	.factory('CountriesAndCities',['$http',function($http){
+		return{
+			getCountriesAndCities : function(callBackFunc){
+				var responsePromise = $http.get('countriesToCities.json');
+			    responsePromise.success(function(data,status,headers,config){
+			       callBackFunc(data);
+			    });
+			}
+		}
+	}]);

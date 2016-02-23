@@ -78,9 +78,9 @@
         console.log($scope.activityList);
     }])
 
-    .controller('DetailController', ['$scope', '$stateParams', '$rootScope','$state','dbFirebase', '$firebaseObject', function($scope, $rootScope, $stateParams, $state, dbFirebase, $firebaseObject) {
+    .controller('DetailController', ['$scope', '$state', '$stateParams', 'dbFirebase', '$firebaseObject', function($scope, $state, $stateParams, dbFirebase, $firebaseObject) {
 
-        console.log($stateParams.activityId);
+        //console.log($stateParams.activityId);
         var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
         var activityRef = myDataRef.child("activity").child($stateParams.activityId);
 

@@ -1,7 +1,7 @@
     /*global Firebase */
     'use strict';
     angular.module('tipntrip2App')
-    .controller('SearchController', ['$scope','$rootScope','$state','countryFactory', 'interestsFactory','CountriesAndCities','dbFirebase', function($scope, $rootScope, $state, countryFactory, interestsFactory,CountriesAndCities) {
+    .controller('SearchController', ['$scope','$rootScope','$state','countryFactory', 'interestsFactory','CountriesAndCities','dbFirebase', function($scope, $rootScope, $state, countryFactory, interestsFactory,CountriesAndCities,dbFirebase) {
         $scope.name = 'World';
         $scope.countries = countryFactory.getCountries();
 
@@ -14,12 +14,33 @@
             // console.log($scope.countryList);
         };
 
-        $scope.saveUserPlan = function(userPlan){
-            userPlan.countryList = $scope.countryList;
-            userPlan.createdDate = new Date();
-            $rootScope.userPlanList.push(userPlan);
-            console.log($rootScope.userPlanList);
-            $state.go('app.step2');
+        $scope.saveUserActivity = function(userActivity){
+            //Status can be accepted, new, decline or cancelled.
+            userActivity.status = 'new';
+            userActivity.travelerUid = 79;
+            userActivity.adviserUid = 80;
+            if(userActivity.typeOfAdvise == 1)
+                userActivity.chargeAmount = 1000;
+            else if(userActivity.typeOfAdvise == 2)
+                userActivity.chargeAmount = 2000;
+            else if(userActivity.typeOfAdvise == 3)
+                userActivity.chargeAmount = 3000;
+            userActivity.title = 'Untitled Trip';
+            userActivity.destinationList = $scope.countryList;
+            var indexes= [];
+            for (var i = 0; i < $scope.roles.length; i++) {
+                if(userActivity.interest[i] === true)
+                   indexes.push(i);
+            };
+            //console.log(indexes);
+            userActivity.interest = [];
+            for (var i = 0; i < indexes.length; i++) {
+                userActivity.interest.push($scope.roles[indexes[i]].name);
+            };
+            var response = dbFirebase.saveActivity(userActivity)
+            console.log(response);    
+            //$rootScope.userPlanList.push(userActivity);
+            //$state.go('app.step2');
         }
 
 

@@ -11,15 +11,15 @@
 				<h4 class="row">Types of Advising</h4>
 				<div class="row">
 					<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="1">
+			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="1">
 			       		<h6>Basic</h6>
 			     	</div>
 			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="2">
+			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="2">
 			       		<h6>Intermadiate</h6>
 			     	</div>
 			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="3" >
+			       		<input type="radio" ng-model="userActivity.typeOfAdvise" ng-value="3" >
 			       		<h6>Express</h6>
 			     	</div>
 				</div>
@@ -40,21 +40,21 @@
 				<h4 class="row">Interests</h4>
 			   	<div class="row">
 			     	<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
-			       		<input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
+			       		<input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
 			       		<h6>{{role.name}}</h6>
 			     	</div>
 			   		<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
-			       		<input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
+			       		<input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
 			       		<h6>{{role.name}}</h6>
 			     	</div>
 				    <div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
-					    <input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
+					    <input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
 					    <h6>{{role.name}}</h6>
 					</div>
 			   	</div>
 			   	<h4 class="row">Comments</h4>
 			   	<div class="form-group row">
-					<textarea ng-model="userPlan.comment" class="col-sm-12"></textarea>
+					<textarea ng-model="userActivity.comment" class="col-sm-12"></textarea>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-4">
@@ -66,7 +66,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-4 col-sm-offset-2">
-				<a ng-click="saveUserPlan(userPlan)" class="btn btn-block btn-info">
+				<a ng-click="saveUserActivity(userActivity)" class="btn btn-block btn-info">
 					Lets Schedule <span class="glyphicon glyphicon-circle-arrow-left"></span>
 				</a>
 			</div>

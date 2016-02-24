@@ -8,12 +8,15 @@
  *
  * Main module of the application.
  */
-angular
+var tripApp = angular
   .module('tipntrip2App', [
     'ngResource',
     'ui.router',
     'firebase'
   ])
+  .run(function($rootScope){
+    $rootScope.userPlanList=[];
+  })
   .config(function ($stateProvider, $urlRouterProvider) {
      $stateProvider
             // route to show our basic find (/find)

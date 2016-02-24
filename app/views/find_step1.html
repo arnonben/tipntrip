@@ -1,27 +1,32 @@
 <!-- Find Advisor step 1 -->
+<div class="page-header text-center">
+            <h2>Let's Schedule Your Trip!</h2>
+          </div>  
 <div class="container">
-	<div class="row">
-		<h3> Where do you want to go? </h3>
-	</div>
 	<form id="loginForm" name="loginForm" novalidate="">  
 		<div class="row row-content">
-		<div class="row">
-			<div class="col-xs-12 col-sm-4 col-sm-offset-2">
-				<h4>Types of Adviding</h4>
+		
+		<div class='row'>
+			<div class="col-xs-12 col-sm-4">
+				<h4 class="row">Types of Advising</h4>
 				<div class="row">
 					<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="user.typeOfAdvise" ng-value="1">
+			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="1">
 			       		<h6>Basic</h6>
 			     	</div>
 			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="user.typeOfAdvise" ng-value="2">
+			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="2">
 			       		<h6>Intermadiate</h6>
 			     	</div>
 			     	<div class="col-sm-4 form-group">
-			       		<input type="radio" ng-model="user.typeOfAdvise" ng-value="3" >
-			       		<h6>Expert</h6>
+			       		<input type="radio" ng-model="userPlan.typeOfAdvise" ng-value="3" >
+			       		<h6>Express</h6>
 			     	</div>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-4">
 				<h4 class="row">Country</h4>
 				<div class="form-group row">
 					<div class="col-sm-12">
@@ -33,64 +38,38 @@
 					</div>
 				</div>
 				<h4 class="row">Interests</h4>
-				<!-- <div class="row">
-			     	<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
-			       		<input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
-			       		<h6>{{role.name}}</h6>
-			     	</div>
-			   		<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
-			       		<input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
-			       		<h6>{{role.name}}</h6>
-			     	</div>
-				    <div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
-					    <input type="checkbox" checklist-model="user.roles" checklist-value="role" name="favoriteColors">
-					    <h6>{{role.name}}</h6>
-					</div>
-			   	</div> -->
 			   	<div class="row">
 			     	<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
-			       		<input type="checkbox" ng-model="user.roles[$index]" ng-value="$index" name="favoriteColors">
+			       		<input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
 			       		<h6>{{role.name}}</h6>
 			     	</div>
 			   		<div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
-			       		<input type="checkbox" ng-model="user.roles[$index]" ng-value="$index" name="favoriteColors">
+			       		<input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
 			       		<h6>{{role.name}}</h6>
 			     	</div>
 				    <div class="col-sm-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
-					    <input type="checkbox" ng-model="user.roles[$index]" ng-value="$index" name="favoriteColors">
+					    <input type="checkbox" ng-model="userPlan.roles[$index]" ng-value="$index" name="favoriteColors">
 					    <h6>{{role.name}}</h6>
 					</div>
 			   	</div>
 			   	<h4 class="row">Comments</h4>
 			   	<div class="form-group row">
-					<textarea ng-model="user.comment" class="col-sm-12"></textarea>
+					<textarea ng-model="userPlan.comment" class="col-sm-12"></textarea>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<h4 class="row-center">My Trip:</h4>
 				<h6 class="row-center" ng-if="countryList.length==0">No Country is Selected</h6>
-				<ul class="list-group">
-					<li class="list-group-item" ng-repeat="country in countryList" ng-hide="list[$index]==true">			<span>{{country}}</span>
-						<a ng-click="removeCountry($index)" class="text-danger pull-right">X</a>
-					</li>
-				</ul>
+				<ul class="list-group" add-country ></ul>
 			</div>
 			<div class="col-sm-2"></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-4 col-sm-offset-2">
-				<!-- <a ui-sref="app.step1" class="btn btn-block btn-info">
-					Previous Section <span class="glyphicon glyphicon-circle-arrow-left"></span>
-				</a> -->
-				<a ng-click="savePlan(user)" class="btn btn-block btn-info">
+				<a ng-click="saveUserPlan(userPlan)" class="btn btn-block btn-info">
 					Lets Schedule <span class="glyphicon glyphicon-circle-arrow-left"></span>
 				</a>
 			</div>
-			<!-- <div class="col-xs-12 col-sm-2 ">
-				<a ui-sref="app.step2" class="btn btn-block btn-info">
-					Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
-				</a>
-			</div>  -->
 		</div>
 		</div>
 	</form>

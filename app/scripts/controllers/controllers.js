@@ -1,43 +1,25 @@
     /*global Firebase */
     'use strict';
     angular.module('tipntrip2App')
-    .controller('SearchController', ['$scope', 'countryFactory', 'interestsFactory','CountriesAndCities', function($scope, countryFactory, interestsFactory,CountriesAndCities) {
-        // CountriesAndCities.getCountriesAndCities(function(response){
-        //     console.log(response);
-        // });
+    .controller('SearchController', ['$scope','$rootScope','$state','countryFactory', 'interestsFactory','CountriesAndCities','dbFirebase', function($scope, $rootScope, $state, countryFactory, interestsFactory,CountriesAndCities) {
         $scope.name = 'World';
         $scope.countries = countryFactory.getCountries();
 
         $scope.roles = interestsFactory.getInterestes();
         $scope.countryList = []; 
-        $scope.addCountry= function(select_country){
-            $scope.check = select_country.name;
-            var isExist = false;
-            for (var i = 0; i < $scope.countryList.length; i++) {
-                if($scope.countryList[i] == select_country.name)
-                    isExist =true;
-            };
-            if(isExist == false)
-                $scope.countryList.push($scope.check);                 
-            
-            //console.log($scope.countryList);
-            //console.log(isExist);
-        };
         $scope.removeCountry = function(index){
-            //$scope.countryList.splice();
-            delete $scope.countryList[index];
-            $scope.list[index] = true;
-            console.log($scope.countryList);
+            console.log(index);
+            // delete $scope.countryList[index];
+            // $scope.list[index] = true;
+            // console.log($scope.countryList);
         };
 
-        $scope.saveUserInterest = function(){
-
-        }
-
-
-        $scope.savePlan = function(user){
-            user.countryList = $scope.countryList;
-            console.log(user);
+        $scope.saveUserPlan = function(userPlan){
+            userPlan.countryList = $scope.countryList;
+            userPlan.createdDate = new Date();
+            $rootScope.userPlanList.push(userPlan);
+            console.log($rootScope.userPlanList);
+            $state.go('app.step2');
         }
 
 

@@ -7,9 +7,9 @@
  * # AboutCtrl
  * Controller of the tipntrip2App
  */
-angular.module('tipntrip2App')
-  .controller('AboutCtrl', function ($scope) {
-    $scope.awesomeThings = [
+angular.module('tipntripApp')
+  .controller('AboutCtrl', function () {
+    this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'

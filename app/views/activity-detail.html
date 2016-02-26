@@ -1,0 +1,55 @@
+<!-- Find Advisor step 3 -->
+<div class="page-header">
+  <h2>Traveler's Activity Details</h2>
+</div> 
+<div class="row">
+   <div class="col-xs-12" style="text-align:center;">
+      <a type="button" class="btn btn-default">Go to Virtual Planner</a>
+   </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-4">
+      <h4>Adviser Name</h4>
+      <button class="btn btn-default">Contact Me</button>
+   </div>
+   <div class="col-xs-4">
+      <h4>{{activity.title}}</h4>
+      <h4>Status: <span class="text-warning">{{activity.status}}</span></h4>
+   </div>
+   <div class="col-xs-4" style="margin-top:1%;">
+         <button class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </button><br>
+         <button class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
+   </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-4">
+      <h4>Advise Level</h4>
+   </div>
+   <div class="col-xs-4">
+      <h4>Basic : 100$</h4>
+   </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-md-6">
+      <h4>Destinations:</h4>
+      <p ng-if="activity.destinationList.length == 0 || activity.destinationList.length==undefined">No destinnations are selected.</p>
+      <p ng-repeat="country in activity.destinationList">{{country}}</p><br/> 
+   </div>
+   <div class="col-md-6">
+      <h4>Interests:</h4>
+      <p ng-if="activity.interest.length == 0 || activity.interest.length==undefined">No Interests are selected</p>
+      <p ng-repeat="interest in activity.interest">{{interest}}</p><br/>
+   </div>
+</div>
+<br/><br/>
+<div class="row">
+   <div class="col-xs-12">
+      <h4>Comments:</h4>
+      <h5>
+         <span>{{activity.comment}}</span>
+      </h5>
+   </div>
+</div>

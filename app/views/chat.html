@@ -1,0 +1,163 @@
+<div class="row">
+    <p class="alert alert-danger" ng-show="err">{{err}}</p>
+</div>
+<div class="row">
+    <button class="btn btn-default pull-right">Let's Schedule</button>
+</div>
+<div class="row">
+    <div class="chat-wrapper">
+        <div class="col-lg-4">
+            <aside class="chat-list-wrapper">
+                <header class="chat-list-header">
+                    <div class="form-group text-right">
+                        <button class="btn btn-xs btn" ng-click="initNewChat()">New Chat &nbsp;<i class="fa fa-pencil-square-o"></i></button>
+                    </div>
+                    <input class="form-control input-sm" placeholder="Search" ng-model="search">
+                </header>
+
+                <div class="chat-list">
+                    <div ng-repeat="chat in chats| conversation:search:users | reverse " ng-click="$parent.selectChat(chat.$id);" ng-class="{'selected':$parent.selected == chat.$id}" ng-init="$index == 0 && !$parent.selected && $parent.selectChat(chat.$id)" ng-show="users[chat.chatWith]._name">
+                        <a href="#/chat/{{chat.$id}}">
+                            <div class="media chat">
+                                <div class="media-left">
+                                    <img class="media-object chat-author-img" alt="{{users[chat.chatWith]._name}}" style="width: 35px; height: 35px;" ng-src="{{users[chat.chatWith]._image}}
+                                         ">
+                                </div>
+                                <div class="media-body">
+                                    <div class="chat-author-name" style="min-height:20px">
+                                        {{users[chat.chatWith]._name}}&nbsp;
+                                        <span class="chat-timestamp pull-right">
+                                            &nbsp;{{chat.modifiedAt| date:'shortTime'}}
+                                        </span>
+                                    </div>
+                                    <div class="chat-meta" style="min-height:20px;width:160px;overflow:hidden;display:inline-block">
+                                        <span class="chat-last-message" ng-if="chat.lastMessage.text" style="white-space:nowrap;">
+                                            <i class="fa fa-paperclip" ng-if="chat.lastMessage.type == 'file'"></i> 
+                                            <span ng-bind-html="chat.lastMessage.text | colonToSmiley">
+                                            </span>
+                                        </span>
+                                        <span class="pull-right badge" ng-if="chat.unread_count">{{chat.unread_count}}</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-lg-8">
+            <section class="chat-message-wrapper">
+                <header class="chat-message-header">
+                    <div class="cf">
+                        <div class="status"  ng-if="selected">
+                            <div class="meta">
+                                <div class="meta__name">
+                                    {{users[getChatWith(selected)]._name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-horizontal" ng-if="!selected">
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-2 control-label">TO</label>
+                                <div class="col-sm-10">
+                                    <angucomplete-alt 
+                                        id="ex1"
+                                        placeholder="Type the name of a person"
+                                        pause="1000"
+                                        selected-object="selectedUser"
+                                        local-data="userslist"
+                                        local-search="localSearch"
+                                        title-field="_source.first_name,_source.last_name"
+                                        minlength="2"
+                                        input-class="form-control form-control-small"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </header>
+                <section class="chat-message">
+                    <div ng-if="selected && loading.messages" class="text-center" style="margin-top:25%">
+                        <i class="fa fa-spinner fa-spin fa-2x"></i>
+                        <h5>Loading</h5>
+                    </div>
+                    <div ng-if="selected && !loading.messages && !messages[selected].length" class="text-center">
+                        <h5 style="margin-top:25%;color:#aaa">No messages found <i class="fa fa-frown-o"></i></h5>
+                    </div>
+                    <div ng-repeat="message in messages[selected]" ng-repeat-directive>
+                        <div class="text-center" ng-if="!$index || (message.createdAt | date:'MMMM d, y')!=(messages[selected][$index-1].createdAt |  date:'MMMM d, y')">
+                            <small>{{message.createdAt| date:'MMMM d, y'}}</small>
+                        </div>
+                        <div class="media">
+                            <div class="media-left" ng-if="users[message.uid].$id != user.uid">
+                                <img class="media-object message-author-img" alt="{{users[message.uid]._name}}" style="width: 35px; height: 35px;" ng-src="{{users[message.uid]._image}}">
+                            </div>
+                            <div class="media-body" ng-class="{'text-right':users[message.uid].$id == user.uid}">
+                                <!-- 
+                                        <div class="message-author-name">
+                                                {{users[message.uid].first_name | capitalize}} {{users[message.uid].last_name | capitalize}}
+                                        </div>
+                                -->
+                                <div class="message-file" ng-if="message.file">
+                                    <a href="{{message.file.payload}}" download="{{message.file.name}}" ng-if="message.file.type == 'image/jpeg' || message.file.type == 'image/png'" >
+                                        <img ng-src="{{message.file.payload}}" class="img-rounded" width="40%" image-on-load-directive>
+                                    </a>
+
+                                    <div ng-if="!(message.file.type == 'image/jpeg' || message.file.type == 'image/png')" class="message-body">
+                                        <a href="{{message.file.payload}}" download="{{message.file.name}}">
+                                            <i class="fa fa-paperclip fa-2x"></i> {{message.file.name}}
+                                            <br>
+                                            size: {{message.file.size| bytes}}  <i class="fa fa-download"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="message-body" ng-if="message.text" ng-bind-html="message.text | colonToSmiley">
+                                </div>
+                                <div class="message-time">
+                                    {{message.createdAt| date:'shortTime'}}
+                                </div>
+                                <div class="message-time"  ng-if="message.status == 'sending'">
+                                    Sending <i class="fa fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                            <div class="media-right" ng-if="users[message.uid].$id == user.uid">
+                                <img class="media-object message-author-img" alt="{{users[message.uid]._name}}" style="width: 35px; height: 35px;" ng-src="{{users[message.uid]._image}}" image-on-load-directive data-islast="{{$last}}">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <footer class="chat-send-message">
+                    <form emoji-form emoji-message="emojiMessage">
+                        <fieldset>
+                            <div class="form-group" style="margin-bottom:5px" >
+                                <textarea class="form-control" rows="3" placeholder="Write a message..."  ng-model="newMessage.text" ng-keyup="profile.EnterToSend && $event.keyCode == 13 && selected && sendMessage(newMessage, selected)">
+                                </textarea>
+                            </div>
+                            <div class="text-right">
+                                <span class='checkbox' style="display:inline-block">
+                                    <label>
+                                        <input type="checkbox" ng-model="profile.EnterToSend"> Press Enter to send &nbsp;&nbsp;
+                                    </label>
+                                </span>
+                                <div class="btn btn-link">
+                                    <span  id="emojibtn">
+                                        <i class="fa fa-smile-o"></i>	
+                                    </span>
+                                </div>
+                                <button class='btn btn-default btn-file-select'>
+                                    {{newMessage.file.name| limitTo:10 }} <i class="fa fa-paperclip"></i>
+                                    <input type="file" id="file" name="file" file-model="newMessage.file"/>
+                                </button>
+                                <button id="submitBtn" type="submit" class="text-right btn btn-default" role="button"  ng-click="sendMessage(newMessage, selected)" ng-disabled="!(selected && (emojiMessage.rawhtml || newMessage.file))">
+                                    <i class="fa fa-paper-plane-o"></i> Send Message
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </footer>
+            </section>
+        </div>
+    </div>
+</div>

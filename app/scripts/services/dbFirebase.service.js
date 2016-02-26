@@ -1,4 +1,4 @@
-angular.module('tipntrip2App')
+angular.module('tipntripApp')
 .factory('dbFirebase', function(){
 	
 	var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');	

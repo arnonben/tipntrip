@@ -1,7 +1,16 @@
     /*global Firebase */
     'use strict';
-    angular.module('tipntrip2App')
-    .controller('SearchController', ['$scope','$rootScope','$state','countryFactory', 'interestsFactory','CountriesAndCities','dbFirebase', function($scope, $rootScope, $state, countryFactory, interestsFactory,CountriesAndCities,dbFirebase) {
+    angular.module('tipntripApp')
+    /*.controller('SearchController', [
+        '$scope',
+        '$rootScope',
+        '$location', 
+        '$routeParams', 
+        'countryFactory', 
+        'interestsFactory',
+        'CountriesAndCities',
+        'dbFirebase', 
+        function($scope, $rootScope, $state, $stateParams, countryFactory, interestsFactory,CountriesAndCities,dbFirebase) {
         
         $scope.name = 'World';
         $scope.countries = countryFactory.getCountries();
@@ -36,7 +45,7 @@
             
             dbFirebase.saveActivity(userActivity);
             alert('Activity Added Successfully');
-            $state.go('app.step2');
+            $location.path( "/advisors" );
         }
 
 
@@ -68,9 +77,9 @@
             $scope.date_depart = date_depart;
             $scope.date_return = date_return;
         };
-    }])
+    }])*/
 
-    .controller('ListController', ['$scope','$rootScope','$state','dbFirebase', '$firebaseObject', function($scope, $rootScope, $state, dbFirebase, $firebaseObject) {
+    .controller('ListController', ['$scope','$rootScope','dbFirebase', '$firebaseObject', function($scope, $rootScope , dbFirebase, $firebaseObject) {
 
         var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
         var activityRef = myDataRef.child("activity");
@@ -80,11 +89,11 @@
         console.log($scope.activityList);
     }])
 
-    .controller('DetailController', ['$scope', '$state', '$stateParams', 'dbFirebase', '$firebaseObject', function($scope, $state, $stateParams, dbFirebase, $firebaseObject) {
+    .controller('DetailController', ['$scope','$routeParams', 'dbFirebase', '$firebaseObject', function($scope, $routeParams, dbFirebase, $firebaseObject) {
 
         //console.log($stateParams.activityId);
         var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-        var activityRef = myDataRef.child("activity").child($stateParams.activityId);
+        var activityRef = myDataRef.child("activity").child($routeParams.activityId);
 
         $scope.activity = $firebaseObject(activityRef);
         
@@ -115,36 +124,95 @@
 
     }])
 
-    .controller('ResultsController', ['$scope', function($scope) {
-        $scope.a = 1;
-    }])
-
     .controller('ProfileController', ['$scope', function($scope) {
         $scope.a = 1;
     }])
 
-    .controller('SigninController' ,['$scope','$firebaseAuth',function($scope,$firebaseAuth){
-        $scope.email = "";
-        $scope.password = "";
+    .controller('SigninController' ,['$scope','$firebaseAuth','$state','$window',function($scope,$firebaseAuth,$state,$window){
+        $scope.user = {email:"",password:""};
+        $scope.user.remember = false;
         $scope.SignIn = function(){ 
+            var mail = $scope.user.email;
+            var pass = $scope.user.password;
+            var rem = "default";
+            if ($scope.user.remember){
+                rem = "sessionOnly";
+            }
+
             var ref = new Firebase("https://tipandtrip.firebaseio.com/");
             ref.authWithPassword({
-              email    : $scope.email,
-              password : $scope.password
-            }, function(error, authData) {
-              if (error) {
-                console.log("Login Failed!", error);
+                email    : mail,
+                password : pass,
+                remember: rem
+              }, function(error, authData) {
+                  if (error) {
+                     $window.alert(error);
+                } else {
+                    $window.alert("Authenticated successfully with payload:", authData);
+                    $state.go('app.step1');
+                }
+            });
+                
+        };
+
+        $scope.Reset = function(){
+            var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+            ref.resetPassword({
+              email : $scope.reset.email
+            }, function(error) {
+              if (error === null) {
+                console.log("Password reset email sent successfully");
               } else {
-                console.log("Authenticated successfully with payload:", authData);
+                console.log("Error sending password reset email:", error);
               }
             });
-            $scope.email = "";
-            $scope.password = "";
-      };
+        }
     }])
 
-    .controller('RegisterController', ['$scope', function($scope) {
-        $scope.data = 1;
+    .controller('RegisterController', ['$scope','$firebaseAuth','$state','$window',function($scope,$firebaseAuth,$state,$window) {
+        $scope.user = {firstname :"",lastname:"",username:"",email:"",password:""};
+
+        $scope.register = function(){
+            var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+            ref.createUser({
+              email: $scope.user.email,
+              password: $scope.user.password
+            }, function(error, userData) {
+              if (error) {
+                switch (error.code) {
+                  case "EMAIL_TAKEN":
+                    console.log("The new user account cannot be created because the email is already in use.");
+                    break;
+                  case "INVALID_EMAIL":
+                    console.log("The specified email is not a valid email.");
+                    break;
+                  default:
+                    console.log("Error creating user:", error);
+                }
+              } else {
+                console.log("Successfully created user account with uid:", userData.uid);
+                ref.child("users").child(userData.uid).set({
+                        first_name: $scope.user.firstname,
+                        last_name: $scope.user.lastname,
+                        username: $scope.user.username,
+                        isAdvisor: false
+
+                });
+                ref.authWithPassword({
+                    email: $scope.user.email,
+                    password: $scope.user.password
+                    }, function(error, authData) {
+                      if (error) {
+                         $window.alert(error);
+                    } else {
+                        $window.alert("Authenticated successfully with payload:", authData);
+                        $state.go('app.step1');
+                    }
+                    });
+
+              }
+            });
+        }
 
     }]);
 

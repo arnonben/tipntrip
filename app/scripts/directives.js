@@ -1,9 +1,10 @@
-tripApp.directive('addCountry', function($parse, $compile){
+angular.module('tipntripApp').
+directive('countryList', function($parse, $compile){
 
 return {
     //require: 'ngModel',
     restrict: "A",
-    transclude: true,
+    transclude: false,
     link : function(scope, element, attrs, model){
     	function addHtml(country,index){
     		console.log(index);
@@ -11,6 +12,7 @@ return {
         };
         
         scope.addCountry = function(select_country){
+            console.log(select_country);
         	scope.check = select_country.name;
             var isExist = false;
             for (var i = 0; i < scope.countryList.length; i++) {
@@ -24,4 +26,15 @@ return {
         };
     }
 }
-});
+})
+/*.directive('removeCountry', function($parse, $compile){
+   return{
+       restrict:"A",
+       transclude:true,
+       link : function(scope, element, attrs, model){
+            scope.removeCountry(index){
+                element.parent.remove();
+            };
+       }
+   } 
+})*/;

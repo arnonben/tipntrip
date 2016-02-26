@@ -1,109 +1,64 @@
 'use strict';
 
+ /* @name chatApp
+=======
 /**
  * @ngdoc overview
  * @name tipntrip2App
+>>>>>>> 7ef80238459073e9277a565cb97f33b40467cfd5
  * @description
- * # tipntrip2App
+ * # chatApp
  *
  * Main module of the application.
  */
-var tripApp = angular
-  .module('tipntrip2App', [
+angular.module('tipntripApp', [
+    'ngAnimate',
+    'ngCookies',
     'ngResource',
-    'ui.router',
-    'firebase'
-  ])
-  .run(function($rootScope){
-    $rootScope.userPlanList=[];
-  })
-  .config(function ($stateProvider, $urlRouterProvider) {
-     $stateProvider
-            // route to show our basic find (/find)
-        .state('app', {
-            url: '/app',
-            controller: 'findController',
-            views:{
-                    'header': {
-                        templateUrl : 'views/header.html',
-                    },
-                    'content': {
-                        templateUrl : 'views/find.html',
-                        controller  : 'SearchController'
-                    },
-                    'footer': {
-                      templateUrl : 'views/footer.html',
-                    }
-            }
-        })
-        
-        
-        
-        // nested states 
-        // each of these sections will have their own view
-        // url will be nested (/find/step1)
-        .state('app.step1', {
-            url: '/step1',
-            templateUrl: 'views/find_step1.html'
-        })
-        
-        // url will be /find/step2
-        .state('app.step2', {
-            url: '/step2',
-            templateUrl: 'views/find_step2.html',
-            controller  : 'ListController'
-        })
-        
-        // url will be /find/step3
-        .state('app.step3', {
-            url: '/step3/:activityId',
-            templateUrl: 'views/find_step3.html',
-            controller  : 'DetailController'
-        })
-  
-  .state('app.step4', {
-            url: '/step4',
-            templateUrl: 'views/find_step4.html'
-        })
-  
-  .state('app.summary', {
-            url: '/summary',
-            templateUrl: 'views/find_summary.html'
-        })
-  
-  .state('login', {
-                url:'/login',
-                views: {
-                    'header': {
-                        templateUrl : 'views/header.html',
-                    },
-                    'content': {
-                        templateUrl : 'views/login.html',
-                        controller  : 'SigninController'
-                    },
-                    'footer': {
-                        templateUrl : 'views/footer.html',
-                    }
-                }
-         })
-  
-  .state('signin', {
-                url:'/signin',
-                views: {
-                    'header': {
-                        templateUrl : 'views/header.html',
-                    },
-                    'content': {
-                        templateUrl : 'views/sigin.html',
-                        controller  : 'RegisterController'
-                    },
-                    'footer': {
-                        templateUrl : 'views/footer.html',
-                    }
-                }
-         });
-       
-    // catch all route
-    // send users to the find page 
-    $urlRouterProvider.otherwise('/app/step1');
-  });
+    'ngRoute',
+    'ngSanitize',
+    'ngTouch',
+    'firebase',
+    'firebase.ref',
+    'firebase.auth',
+    'angucomplete-alt',
+    'ui.bootstrap',
+    'emojiApp',
+    'checklist-model',
+    'mgo-angular-wizard'
+]);
+
+angular.module('tipntripApp')
+
+        .config(['$compileProvider', function ($compileProvider) {
+                $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension|data):/);
+            }])
+
+        .run(function ($rootScope) {
+//            $rootScope.email = User;
+        });
+
+
+
+function ucfirst(str) {
+    // inspired by: http://kevin.vanzonneveld.net
+    str += '';
+    var f = str.charAt(0).toUpperCase();
+    return f + str.substr(1);
+}
+
+var getIndexIfObjWithOwnAttr = function (array, attr, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].hasOwnProperty(attr) && array[i][attr] === value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+String.prototype.capitalizeFirstLetter = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+

@@ -1,0 +1,122 @@
+{
+  "rules": {
+     "users": {
+          // Anyone can read users
+          ".read": "auth != null",
+          "$user": {
+            // I can write and update only my data
+            ".write": "auth.uid === $user && (!newData.exists() || newData.hasChildren())",
+            // Field validation
+            "first_name": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "last_name": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "username": {
+               ".validate": "newData.isString() && newData.val().length <= 200"
+            },
+            "email": {
+               ".validate": "newData.isString() && newData.val().length <= 320"
+            },
+            // EnterToSend boolean validatoin
+            "EnterToSend":{
+               ".validate": "newData.val() == true || newData.val() == false"
+            },
+            // invalid other fields
+            "$other": {
+               ".validate": false
+            }
+         }
+    },
+   "chat-messages": {
+      "$chatId": {
+           // I can read messages to chat I'm part of
+          ".read": "auth != null && $chatId.contains(auth.uid)",
+          // I can write messages to chat I'm part of
+          ".write": "auth != null && $chatId.contains(auth.uid)",
+          ".indexOn": ["createdAt"],
+          "$messageId": {
+             "text": {
+               ".validate": "newData.isString() && newData.val().length <= 4000"
+             },
+             "uid": {
+               ".validate": "newData.isString() && newData.val() == auth.uid"
+             },
+             "createdAt": {
+               ".validate": "newData.isNumber()"
+             },
+             "file":{
+               // File should have name, payload and size field and file size should be less than 10 MB
+               ".validate": "newData.hasChildren(['name', 'payload', 'size']) && newData.child('name').isString() &&  newData.child('size').isNumber() && newData.child('size').val() < 10485760"
+             }
+          }
+      }
+    },
+    "user-chats": {
+      "$userId": {
+      // I can only read only my chats
+       ".read": "auth != null && auth.uid == $userId ",
+        "$chatId": {
+             // I can write to chat I'm part of
+            ".write": "auth != null && $chatId.contains($userId)"
+        },
+       ".indexOn": ["modifiedAt"]
+      }
+    },
+    "advisors": {
+      ".read":"auth != null",
+      ".write":"auth != null"
+    },
+    "advisors-destinations": {
+      ".read":"auth != null",
+      ".write":"auth != null"
+    },
+    "advisors-interests": {
+      ".read":"auth != null",
+      ".write":"auth != null"
+    },
+    "search": {
+         "request": {
+            "$recid": {
+               // I can only read records assigned to me
+               ".read": "auth.id === data.child('id').val() || auth.uid === data.child('id').val()",
+               // I can only write new records that don't exist yet
+               ".write": "!data.exists() && (newData.child('id').val() === auth.id || newData.child('id').val() === auth.uid)",
+               ".validate": "newData.hasChildren(['query', 'index', 'type'])",
+               "index": {
+                  // accepts arrays or strings
+                  ".validate": "(newData.isString() && newData.val().length < 1000) || newData.hasChildren()",
+                  "$child": {
+                     ".validate": "newData.isString() && newData.val().length < 1000"
+                  }
+               },
+               "type": {
+                  // accepts arrays or strings
+                  ".validate": "(newData.isString() && newData.val().length < 1000) || newData.hasChildren()",
+                  "$child": {
+                     ".validate": "newData.isString() && newData.val().length < 1000"
+                  }
+               },
+               "query": {
+                  // structure of the query object is pretty open-ended
+                  ".validate": "newData.isString() || newData.hasChildren()"
+               },
+               "$other": {
+                  ".validate": false
+               }
+            }
+         },
+         "response": {
+            "$recid": {
+               // I can only read/write records assigned to me
+               ".read": "auth.id === data.child('id').val() || auth.uid === data.child('id').val()",
+               ".write": "auth.id === data.child('id').val() || auth.uid === data.child('id').val()",
+               // Assumes that Flashlight will be writing the records using a secret or a token that has admin: true
+               // The only thing a logged in user needs to do is delete results after reading them
+               ".validate": false
+            }
+         }
+      }
+  }
+}

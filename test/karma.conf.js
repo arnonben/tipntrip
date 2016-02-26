@@ -1,7 +1,9 @@
 // Karma configuration
 // http://karma-runner.github.io/0.12/config/configuration-file.html
-// Generated on 2015-12-31 using
-// generator-karma 1.0.0
+// Generated on 2016-01-04 using
+// generator-karma 1.0.1
+// Generated on 2016-01-04 using
+// generator-karma 1.0.1
 
 module.exports = function(config) {
   'use strict';
@@ -11,18 +13,42 @@ module.exports = function(config) {
     autoWatch: true,
 
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: '../',
+    basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     // as well as any additional frameworks (requirejs/chai/sinon/...)
     frameworks: [
-      "jasmine"
+    "jasmine"
     ],
 
     // list of files / patterns to load in the browser
     files: [
+      // bower:js
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/angular/angular.js',
+      'bower_components/firebase/firebase.js',
+      'bower_components/angularfire/dist/angularfire.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
+      'bower_components/angular-animate/angular-animate.js',
+      'bower_components/angular-cookies/angular-cookies.js',
+      'bower_components/angular-resource/angular-resource.js',
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-sanitize/angular-sanitize.js',
+      'bower_components/angular-touch/angular-touch.js',
+      'bower_components/angular-emoji-popup/dist/js/config.js',
+      'bower_components/angular-emoji-popup/dist/js/emoji.min.js',
+      'bower_components/angular-wizard/dist/angular-wizard.min.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/checklist-model/checklist-model.js',
+      'bower_components/mockfirebase/browser/mockfirebase.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      // endbower
+      "app/lib/**/*.js",
+      "app/scripts/**/*.js",
+      "test/mock/**/*.js",
+      "test/spec/**/*.js"
     ],
-
     // list of files / patterns to exclude
     exclude: [
     ],
@@ -39,13 +65,13 @@ module.exports = function(config) {
     // - PhantomJS
     // - IE (only Windows)
     browsers: [
-      "PhantomJS"
+    "PhantomJS"
     ],
 
     // Which plugins to enable
     plugins: [
-      "karma-phantomjs-launcher",
-      "karma-jasmine"
+    "karma-phantomjs-launcher",
+    "karma-jasmine"
     ],
 
     // Continuous Integration mode

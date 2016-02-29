@@ -1,5 +1,5 @@
 angular.module('tipntripApp').
-directive('countryList', function($parse, $compile){
+directive('destinationsList', function($parse, $compile){
 
 return {
     //require: 'ngModel',
@@ -15,13 +15,13 @@ return {
             console.log(select_country);
         	scope.check = select_country.name;
             var isExist = false;
-            for (var i = 0; i < scope.countryList.length; i++) {
-                if(scope.countryList[i] == select_country.name)
+            for (var i = 0; i < scope.destinationsList.length; i++) {
+                if(scope.destinationsList[i] == select_country.name)
                     isExist =true;
             };
             if(isExist == false){
-                scope.countryList.push(scope.check);
-        		addHtml(scope.check,scope.countryList.length - 1);
+                scope.destinationsList.push(scope.check);
+        		addHtml(scope.check,scope.destinationsList.length - 1);
         	}
         };
     }

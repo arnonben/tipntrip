@@ -12,7 +12,6 @@ return {
         };
         
         scope.addCountry = function(select_country){
-            console.log(select_country);
         	scope.check = select_country.name;
             var isExist = false;
             for (var i = 0; i < scope.destinationsList.length; i++) {

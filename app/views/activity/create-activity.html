@@ -28,7 +28,7 @@
                     <legend>Types of Advising</legend>
                     <div class="row">
                       <div ng-repeat="service in advisorSecvices" class="col-xs-4 form-group">
-                            <input type="radio" ng-model="userActivity.service_uid"value="service.$id">
+                            <input type="radio" name="service" ng-model="userActivity.service_uid" value="{{service.$id}}">
                             <h3>{{service.title}} ({{service.price}})</h3>
                             <p>{{service.description}}</p>
                         </div>
@@ -62,15 +62,15 @@
                   <div class="col-xs-12">
                     <h4>Interests</h4>
                     <div class="col-xs-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===0">
-                      <input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
+                      <input type="checkbox" ng-model="userActivity.interest[$index]" value="{{role.name}}" name="favoriteColors">
                       <h6 style="display:inline;">{{role.name}}</h6>
                     </div>
                     <div class="col-xs-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===1">
-                      <input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
+                      <input type="checkbox" ng-model="userActivity.interest[$index]" value="{{role.name}}" name="favoriteColors">
                       <h6 style="display:inline;">{{role.name}}</h6>
                     </div>
                     <div class="col-xs-4 form-group" ng-repeat="role in roles | filter:search" ng-if="$index%3===2">
-                      <input type="checkbox" ng-model="userActivity.interest[$index]" ng-value="$index" name="favoriteColors">
+                      <input type="checkbox" ng-model="userActivity.interest[$index]" value="{{role.name}}" name="favoriteColors">
                       <h6 style="display:inline;">{{role.name}}</h6>
                     </div>
                   </div>

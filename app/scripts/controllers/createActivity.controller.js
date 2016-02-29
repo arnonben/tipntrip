@@ -35,8 +35,12 @@ angular.module('tipntripApp')
                 $scope.roles = interestsFactory.getInterestes();
                 $scope.destinationsList = [];
                 $scope.countries = countryFactory.getCountries();
+
+                $scope.userActivity = {};
+                $scope.userActivity.service_uid = null;
+                $scope.userActivity.interest = [];
+
                 var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-                
                 var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
                 $scope.advisorSecvices = $firebaseArray(advisorRef); 
                 
@@ -54,26 +58,21 @@ angular.module('tipntripApp')
 
                     //Status can be accepted, new, decline or cancelled.
                     userActivity.status = 'new';
-                    if(userActivity.title == '' || userActivity.title == undefined)
-                        userActivity.title = 'Untitled Trip';
+
+                    var interests = [];
+                    angular.forEach(userActivity.interest, function(value, key) {
+                        if(value == true)
+                            interests.push($scope.roles[key].name);
+                    });
                     
                     userActivity.destinationList = $scope.destinationsList;
+                    userActivity.interest = interests;
+
                     console.log(userActivity);
-                    //console.log(travelerActivity);
-                    /*var indexes= [];
-                    for (var i = 0; i < $scope.advisorInterests.length; i++) {
-                        if(userActivity.interest[i] === true)
-                           indexes.push(i);
-                    };
-                
-                    userActivity.interest = [];
-                    for (var i = 0; i < indexes.length; i++) {
-                        userActivity.interest.push($scope.advisorInterests[indexes[i]].$id);
-                    };*/
-                    var response = dbFirebase.saveActivity(userActivity,advisorUid,travelerUid)
-                    console.log(response);    
                     
-                    //$location.path('/activityList');
+                    var response = dbFirebase.saveActivity(userActivity,advisorUid,travelerUid)  
+                    
+                    $location.path('/activityList');
                 }
 
              

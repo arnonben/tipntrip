@@ -7,15 +7,29 @@ angular.module('tipntripApp')
 		'dbFirebase', 
 		'$firebaseObject', 
 		function($scope, $rootScope , $routeParams, dbFirebase, $firebaseObject) {
-			if($routeParams.activityId == undefined){
-	        	var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-	        	var activityRef = myDataRef.child("activity");
+
+			var ref = new Firebase("https://tipandtrip.firebaseio.com/");
+			var authData = ref.getAuth();
+            console.log(authData);
+
+			$scope.getName = function(uid){
+				console.log(uid);
+				var userRef = ref.child('users').child(uid);
+				var userObj = $firebaseObject(userRef);
+				console.log(userObj);
+				return userObj.first_name;
+			}
+
+			if($routeParams.activityId == undefined)
+			{
+	        	var activityRef = ref.child("traveller-activities").child(authData.uid);
+
 		        $scope.activityList = $firebaseObject(activityRef);
 	        	console.log($scope.activityList);
 	        }
-	        else{
-	        	var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-        		var activityRef = myDataRef.child("activity").child($routeParams.activityId);
+	        else
+	        {
+        		var activityRef = ref.child("traveller-activities").child(authData.uid).child($routeParams.activityId);
         		$scope.activity = $firebaseObject(activityRef); 
         		console.log($scope.activity);
 	        }

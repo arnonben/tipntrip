@@ -1,6 +1,6 @@
 <!-- Find Advisor step 3 -->
 <div class="page-header">
-  <h2>Traveler's Activity Details</h2>
+  <h2>{{activity.title}} Activity Details</h2>
 </div> 
 <div class="row">
    <div class="col-xs-12" style="text-align:center;">
@@ -14,7 +14,7 @@
       <button class="btn btn-default">Contact Me</button>
    </div>
    <div class="col-xs-4">
-      <h4>{{activity.title}}</h4>
+      <h4>{{getName(activity.advisorUid)}}</h4>
       <h4>Status: <span class="text-warning">{{activity.status}}</span></h4>
    </div>
    <div class="col-xs-4" style="margin-top:1%;">
@@ -28,9 +28,7 @@
       <h4>Advise Level</h4>
    </div>
    <div class="col-xs-4">
-      <h4 ng-if="activity.charge_amount == 1">Basic : 1000$</h4>
-      <h4 ng-if="activity.charge_amount == 2">Intermadiate : 2000$</h4>
-      <h4 ng-if="activity.charge_amount == 3">Expert : 3000$</h4>
+      <h4>{{activity.service_uid}}</h4>
    </div>
 </div>
 <br/><br/>

@@ -57,7 +57,11 @@ angular.module('tipntripApp')
         // before trying to access that route
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider
-                        .when('/', {
+                        .when('/',{
+                            templateUrl : 'views/user/advisor-list.html',
+                            controller : 'AdvisorCtrl'
+                        })
+                        .when('/createActivity/:advisorId', {
                             templateUrl: 'views/activity/create-activity.html',
                             controller: 'CreateActivityCtrl'
                         })
@@ -93,7 +97,7 @@ angular.module('tipntripApp')
                             templateUrl: 'views/find_results.html',
                             controller: 'ResultsCtrl'
                         })
-                        .otherwise({redirectTo: '/'});
+                        .otherwise({redirectTo: '/login'});
             }])
 
         /**

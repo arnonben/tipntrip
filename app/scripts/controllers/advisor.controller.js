@@ -10,6 +10,8 @@ angular.module('tipntripApp')
 
             var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
             var advisorRef = myDataRef.child("advisors");
+            var authData = myDataRef.getAuth();
+            $scope.uid = authData.uid;
             $scope.advisorList = $firebaseObject(advisorRef);
             console.log($scope.advisorList);
             

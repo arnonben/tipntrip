@@ -39,7 +39,7 @@ angular.module('tipntripApp')
                 $scope.userActivity = {};
                 $scope.userActivity.service_uid = null;
                 $scope.userActivity.interest = [];
-
+                $scope.noDestination = false;
                 var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
                 var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
                 $scope.advisorSecvices = $firebaseArray(advisorRef); 
@@ -51,6 +51,9 @@ angular.module('tipntripApp')
                 $scope.advisorInterests = $firebaseArray(advisorInterestRef);
 
                 $scope.saveUserActivity = function(userActivity){
+                    if($scope.destinationsList.length == 0)
+                        return $scope.noDestination=true;
+
                     var ref = new Firebase("https://tipandtrip.firebaseio.com/");
                     var authData = ref.getAuth();
                     var travelerUid = authData.uid;
@@ -72,7 +75,7 @@ angular.module('tipntripApp')
                     
                     var response = dbFirebase.saveActivity(userActivity,advisorUid,travelerUid)  
                     
-                    $location.path('/activityList');
+                    //$location.path('/activityList');
                 }
 
              

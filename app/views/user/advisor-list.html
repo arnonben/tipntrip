@@ -1,8 +1,8 @@
 <!-- Advisor List -->
   <div class="page-header">
-    <h2>Advisors List</h2>
-  </div> 
-  <div class="row" ng-repeat="(name,advisor) in advisorList">
+    <h2>Find your Advisor</h2>
+  </div>
+  <div class="row" ng-repeat="(name,advisor) in advisorList" ng-if="name!=uid">
     <div class="col-xs-10">
       <div class="panel panel-default">
         <div class="panel-body">

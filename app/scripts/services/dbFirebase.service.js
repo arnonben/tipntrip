@@ -21,20 +21,18 @@ angular.module('tipntripApp')
 
 	return{
 		saveActivity : function(activity,advisorId,travellerId){
-			var newActivity = activityRef.push();
-			newActivity.set(activity);
-			
 			var advisorActivity = activity;
-			advisorActivity.advisorUid = advisorId;
+			advisorActivity.travellerId = travellerId;
 			
 			var newAdvisorActivityNodeRef = advisorActivityRef.child(advisorId);
 			newActivity =  newAdvisorActivityNodeRef.push();
 			newActivity.set(advisorActivity);
 
 			var travellerActivity = activity;
-			travellerActivity.travellerUid = travellerId;
-			
-			var newTravellerActivityNodeRef = travellerActivityRef.child(advisorId);
+			delete travellerActivity.travellerId;
+			travellerActivity.advisorId = advisorId;
+
+			var newTravellerActivityNodeRef = travellerActivityRef.child(travellerId);
 			newActivity =  newTravellerActivityNodeRef.push();
 			newActivity.set(travellerActivity);	
 			return true;

@@ -69,7 +69,7 @@ angular.module('tipntripApp')
                             templateUrl:'views/activity/activity-list.html',
                             controller : 'ActivityCtrl'
                         })
-                        .when('/activity/:activityId',{
+                        .when('/activity/:activityId/:activityType',{
                             templateUrl : 'views/activity/activity-detail.html',
                             controller : 'ActivityCtrl'
                         })

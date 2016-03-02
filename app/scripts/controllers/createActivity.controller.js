@@ -17,6 +17,7 @@ angular.module('tipntripApp')
             'User',
             '$firebaseAuth',
             '$firebaseArray',
+            '$firebaseObject',
             '$location',
             '$routeParams',
             function ($scope,
@@ -28,54 +29,89 @@ angular.module('tipntripApp')
                 User,
                 $firebaseAuth,
                 $firebaseArray,
+                $firebaseObject,
                 $location,
                 $routeParams) {
 
-                $scope.user = {roles: []};
-                $scope.roles = interestsFactory.getInterestes();
-                $scope.destinationsList = [];
-                $scope.countries = countryFactory.getCountries();
+                var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
+                
+                var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
+
+                var authData = myDataRef.getAuth();
+
+                var advisorActivityRef = myDataRef.child("advisor-activities");
+                var travellerActivityRef = myDataRef.child("traveller-activities");
+
+                var advisorObjList = $firebaseArray(advisorActivityRef.child($routeParams.advisorId));
+                var travelObjList = $firebaseArray(travellerActivityRef.child(authData.uid));
+                
+                var interests = [];
+                var advisorObj = {};
+                var travelObj = {};
 
                 $scope.userActivity = {};
                 $scope.userActivity.service_uid = null;
                 $scope.userActivity.interest = [];
                 $scope.noDestination = false;
-                var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-                var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
+                
+                $scope.user = {roles: []};
+                $scope.roles = interestsFactory.getInterestes();
+                $scope.destinationsList = [];
+                $scope.countries = countryFactory.getCountries();
+
                 $scope.advisorSecvices = $firebaseArray(advisorRef); 
                 
-                var advisorDestinationRef = myDataRef.child("advisors-destinations").child($routeParams.advisorId);
-                $scope.advisorDestinations = $firebaseArray(advisorDestinationRef);
-                
-                var advisorInterestRef = myDataRef.child("advisors-interests").child($routeParams.advisorId);
-                $scope.advisorInterests = $firebaseArray(advisorInterestRef);
-
                 $scope.saveUserActivity = function(userActivity){
+                    
+                    console.log(userActivity);
+
+                    if(userActivity.title == undefined || userActivity.title == '')
+                    {
+                        alert('Please enter title');
+                        return;
+                    }
+
+                    if(userActivity.service_uid == null)
+                    {
+                        alert('Please enter service type');
+                        return;
+                    }
+
                     if($scope.destinationsList.length == 0)
                         return $scope.noDestination=true;
 
-                    var ref = new Firebase("https://tipandtrip.firebaseio.com/");
-                    var authData = ref.getAuth();
-                    var travelerUid = authData.uid;
-                    var advisorUid = $routeParams.advisorId;
+                    travelObj.status = 'new';
 
-                    //Status can be accepted, new, decline or cancelled.
-                    userActivity.status = 'new';
-
-                    var interests = [];
+                    travelObj.title = userActivity.title;
+                    travelObj.comment = userActivity.comment;
+                    travelObj.service_uid = userActivity.service_uid;
+                    
                     angular.forEach(userActivity.interest, function(value, key) {
                         if(value == true)
                             interests.push($scope.roles[key].name);
                     });
                     
-                    userActivity.destinationList = $scope.destinationsList;
-                    userActivity.interest = interests;
+                    travelObj.destinationList = $scope.destinationsList;
+                    travelObj.interest  = interests;
 
-                    console.log(userActivity);
+                    advisorObj = travelObj;
+
+                    console.log(advisorObj);
+                    advisorObj.travellerId = authData.uid;
                     
-                    var response = dbFirebase.saveActivity(userActivity,advisorUid,travelerUid)  
-                    
-                    //$location.path('/activityList');
+                    advisorObjList.$add(advisorObj).then(function(ref) {
+                        console.log(ref.key()); 
+                    }, function(error) {
+                        console.log("Error:", error);
+                    });
+
+                    travelObj.advisorId = $routeParams.advisorId;
+
+                    travelObjList.$add(travelObj).then(function(ref) {
+                        $location.path("/activity/"+ref.key()+"/travel"); 
+                    }, function(error) {
+                        console.log("Error:", error);
+                    });
                 }
 
              

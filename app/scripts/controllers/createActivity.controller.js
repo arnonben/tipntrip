@@ -64,8 +64,6 @@ angular.module('tipntripApp')
                 
                 $scope.saveUserActivity = function(userActivity){
                     
-                    console.log(userActivity);
-
                     if(userActivity.title == undefined || userActivity.title == '')
                     {
                         alert('Please enter title');
@@ -78,13 +76,25 @@ angular.module('tipntripApp')
                         return;
                     }
 
+                    if(userActivity.interest.length == 0)
+                    {
+                        alert('Please provide your interests');
+                        return;
+                    }
+
                     if($scope.destinationsList.length == 0)
-                        return $scope.noDestination=true;
+                    {
+                        alert('Please provide your destinations');
+                        return;
+                    }
 
                     travelObj.status = 'new';
 
                     travelObj.title = userActivity.title;
-                    travelObj.comment = userActivity.comment;
+                    
+                    if(userActivity.comment != undefined)
+                        travelObj.comment = userActivity.comment;
+                    
                     travelObj.service_uid = userActivity.service_uid;
                     
                     angular.forEach(userActivity.interest, function(value, key) {

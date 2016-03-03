@@ -56,9 +56,9 @@ angular.module('tipntripApp')
 				    $scope.activity.advisorName = '';
 
 				    if($routeParams.activityType == 'advisor')
-				    	var userRef = $firebaseObject(ref.child("users").child($scope.activity.advisorId));
-				    else
 				    	var userRef = $firebaseObject(ref.child("users").child($scope.activity.travellerId));
+				    else
+				    	var userRef = $firebaseObject(ref.child("users").child($scope.activity.advisorId));
 
 					userRef.$loaded()
 					  .then(function(data) {

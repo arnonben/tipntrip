@@ -46,6 +46,7 @@ angular.module('tipntripApp')
                 var travelObjList = $firebaseArray(travellerActivityRef.child(authData.uid));
                 
                 var interests = [];
+                var destination = [];
                 var advisorObj = {};
                 var travelObj = {};
 
@@ -90,8 +91,12 @@ angular.module('tipntripApp')
                         if(value == true)
                             interests.push($scope.roles[key].name);
                     });
+
+                    angular.forEach($scope.destinationsList, function(value, key) {
+                        destination.push(value.name);
+                    });
                     
-                    travelObj.destinationList = $scope.destinationsList;
+                    travelObj.destinationList = destination;
                     travelObj.interest  = interests;
 
                     advisorObj = travelObj;

@@ -9,7 +9,8 @@ angular.module('tipntripApp')
 		'$firebaseObject',
 		'userService', 
 		'countryFactory',
-		function($scope, $rootScope, $routeParams, dbFirebase, $firebaseArray, $firebaseObject, userService, countryFactory) {
+		'$q',
+		function($scope, $rootScope, $routeParams, dbFirebase, $firebaseArray, $firebaseObject, userService, countryFactory, $q) {
 
 			var ref = new Firebase("https://tipandtrip.firebaseio.com/");
 			var authData = ref.getAuth();
@@ -17,6 +18,97 @@ angular.module('tipntripApp')
 
             $scope.advisorName = '';
             $scope.activityType = null;
+            $scope.advisorActivities = [];
+            $scope.travellerNames = [];
+
+            $scope.getAdviosorData = function() {
+            	
+            	var deferred = $q.defer();
+    			var subPromise = [];
+
+    			var advisorActivityRef = ref.child("advisor-activities").child(authData.uid);
+		        var advisorObj = $firebaseObject(advisorActivityRef);
+
+    			var advisorActivities = [];
+    			var activityData = [];
+
+		        var func = advisorObj.$loaded().then(function(data) {
+		        	activityData = data;
+				});
+
+				subPromise.push(func);
+
+				$q.all(subPromise).then(function() {
+
+					var sub = []
+
+					angular.forEach(activityData, function(value, key) {
+                        
+	                    var userRef = $firebaseObject(ref.child("users").child(value.travellerId));
+
+						var func = userRef.$loaded()
+						  .then(function(data) {
+						    value.travellerName = data.first_name + ' ' + data.last_name;
+						    advisorActivities.push(value);
+						    console.log(value);
+						});
+						  
+						sub.push(func);
+	                });
+
+					$q.all(sub).then(function() {
+			    		console.log(advisorActivities);
+			    		deferred.resolve(advisorActivities);
+			    	});
+			    });
+
+			    return deferred.promise;
+            }
+
+            $scope.getTravellerData = function(){
+
+            	var deferred = $q.defer();
+    			var subPromise = [];
+
+    			var advisorActivityRef = ref.child("traveller-activities").child(authData.uid);
+		        var advisorObj = $firebaseObject(advisorActivityRef);
+
+    			var advisorActivities = [];
+    			var activityData = [];
+
+		        var func = advisorObj.$loaded().then(function(data) {
+		        	activityData = data;
+				});
+
+				subPromise.push(func);
+
+				$q.all(subPromise).then(function() {
+
+					var sub = []
+
+					angular.forEach(activityData, function(value, key) {
+                        
+	                    var userRef = $firebaseObject(ref.child("users").child(value.advisorId));
+
+						var func = userRef.$loaded()
+						  .then(function(data) {
+						    value.advisorName = data.first_name + ' ' + data.last_name;
+						    advisorActivities.push(value);
+						    console.log(value);
+						});
+						  
+						sub.push(func);
+	                });
+
+					$q.all(sub).then(function() {
+			    		console.log(advisorActivities);
+			    		deferred.resolve(advisorActivities);
+			    	});
+			    });
+
+			    return deferred.promise;
+
+            }
 			
 			$scope.countries = countryFactory.getCountries();
             $scope.getCountryCode = function(countryName){
@@ -28,11 +120,13 @@ angular.module('tipntripApp')
 
 			if($routeParams.activityId == undefined)
 			{
-	        	var travellerActivityRef = ref.child("traveller-activities").child(authData.uid);
-		        $scope.travellerActivities = $firebaseObject(travellerActivityRef);
+		        $scope.getTravellerData().then(function(data){
+		        	$scope.travellerActivities = data;
+		        });
 
-		        var advisorActivityRef = ref.child("advisor-activities").child(authData.uid);
-		        $scope.advisorActivities = $firebaseObject(advisorActivityRef);
+		        $scope.getAdviosorData().then(function(data){
+		        	$scope.advisorActivities = data;
+		        });
 	        }
 	        else
 	        {

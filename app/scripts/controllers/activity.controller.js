@@ -33,6 +33,7 @@ angular.module('tipntripApp')
     			var activityData = [];
 
 		        var func = advisorObj.$loaded().then(function(data) {
+		        	console.log(data);
 		        	activityData = data;
 				});
 
@@ -49,6 +50,7 @@ angular.module('tipntripApp')
 						var func = userRef.$loaded()
 						  .then(function(data) {
 						    value.travellerName = data.first_name + ' ' + data.last_name;
+						    value.key = key;
 						    advisorActivities.push(value);
 						    console.log(value);
 						});
@@ -93,6 +95,7 @@ angular.module('tipntripApp')
 						var func = userRef.$loaded()
 						  .then(function(data) {
 						    value.advisorName = data.first_name + ' ' + data.last_name;
+						   	value.key = key;
 						    advisorActivities.push(value);
 						    console.log(value);
 						});

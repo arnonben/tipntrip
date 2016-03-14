@@ -34,10 +34,9 @@ angular.module('tipntripApp')
                 $routeParams) {
 
                 var myDataRef = new Firebase('https://tipandtrip.firebaseio.com');  
-                
-                var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
-
                 var authData = myDataRef.getAuth();
+
+                var advisorRef = myDataRef.child("advisors-services").child($routeParams.advisorId);
 
                 var advisorActivityRef = myDataRef.child("advisor-activities");
                 var travellerActivityRef = myDataRef.child("traveller-activities");
@@ -84,13 +83,15 @@ angular.module('tipntripApp')
                             if(data.destinationList.indexOf(value.name) != -1)
                                 $scope.destinationsList.push(value);
                         });
-                        
+
                         console.log($scope.destinationsList);
 
                         $scope.userActivity.service_uid = data.service_uid;
                         $scope.userActivity.title = data.title;
                         $scope.userActivity.comment = data.comment;
-                        $scope.userActivity.activityId = data.id;
+                        $scope.userActivity.activityId = $routeParams.activityId;
+
+
 
                         console.log($scope.userActivity);
                         console.log($scope.countries);
@@ -123,15 +124,6 @@ angular.module('tipntripApp')
                         return;
                     }
 
-                    travelObj.status = 'new';
-
-                    travelObj.title = userActivity.title;
-                    
-                    if(userActivity.comment != undefined)
-                        travelObj.comment = userActivity.comment;
-                    
-                    travelObj.service_uid = userActivity.service_uid;
-                    
                     angular.forEach(userActivity.interest, function(value, key) {
                         if(value == true)
                             interests.push($scope.roles[key].name);
@@ -140,28 +132,69 @@ angular.module('tipntripApp')
                     angular.forEach($scope.destinationsList, function(value, key) {
                         destination.push(value.name);
                     });
-                    
-                    travelObj.destinationList = destination;
-                    travelObj.interest  = interests;
 
-                    advisorObj = travelObj;
+                    var guid = $scope.guid();
 
-                    console.log(advisorObj);
-                    advisorObj.travellerId = authData.uid;
+                    var obj = travellerActivityRef.child(authData.uid).child(guid);
+                    var objTravel = $firebaseObject(obj);
+
+                    objTravel.status = 'pending';
+                    objTravel.title = userActivity.title;
                     
-                    advisorObjList.$add(advisorObj).then(function(ref) {
-                        console.log(ref.key()); 
-                    }, function(error) {
-                        console.log("Error:", error);
+                    if(userActivity.comment != undefined)
+                        objTravel.comment = userActivity.comment;
+                    
+                    objTravel.service_uid = userActivity.service_uid;
+                    objTravel.destinationList = destination;
+                    objTravel.interest  = interests;
+                    objTravel.advisorId = $routeParams.advisorId;
+
+                    objTravel.$save().then(function(ref) {
+                        console.log(ref);
                     });
 
-                    travelObj.advisorId = $routeParams.advisorId;
+                    var obj = advisorActivityRef.child($routeParams.advisorId).child(guid);
+                    var objAdvisor = $firebaseObject(obj);
 
-                    travelObjList.$add(travelObj).then(function(ref) {
-                        $location.path("/activity/"+ref.key()+"/travel"); 
-                    }, function(error) {
-                        console.log("Error:", error);
+
+                    objAdvisor.status = 'pending';
+                    objAdvisor.title = userActivity.title;
+                    
+                    if(userActivity.comment != undefined)
+                        objAdvisor.comment = userActivity.comment;
+                    
+                    objAdvisor.service_uid = userActivity.service_uid;
+                    objAdvisor.destinationList = destination;
+                    objAdvisor.interest  = interests;
+                    objAdvisor.travellerId = authData.uid;
+
+                    objAdvisor.$save().then(function(ref) {
+                        $location.path("/activity/"+guid+"/travel"); 
                     });
+
+                    if($routeParams.activityId != undefined)
+                    {
+                        // var objRef = travellerActivityRef.child(authData.uid).child($routeParams.activityId);
+                        // var obj = $firebaseObject(objRef); 
+                        // obj.$loaded().then(function(data) {
+                        //     obj.title = travelObj.title;
+                        //     obj.comment = travelObj.comment;
+                        //     obj.service_uid = travelObj.service_uid;
+                        //     obj.destinationList = travelObj.destinationList;
+                        //     obj.interest = travelObj.interest;
+
+                        //     obj.$save().then(function(ref) {
+                        //         alert('Activity is updated successfully');
+                        //     }, function(error) {
+                        //         console.log("Error:", error);
+                        //     });
+                        // });
+                    }
+                    else
+                    {
+                        
+                        
+                    }
                 }
 
              
@@ -248,6 +281,15 @@ angular.module('tipntripApp')
                     $scope.budget = newBudget;
                 };
 
+                $scope.guid = function() {
+                  function s4() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                      .toString(16)
+                      .substring(1);
+                  }
+                  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                    s4() + '-' + s4() + s4() + s4();
+                }
               
                 $scope.date_depart = new Date();
                 $scope.date_return = new Date();

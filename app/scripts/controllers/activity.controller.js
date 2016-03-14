@@ -123,15 +123,34 @@ angular.module('tipntripApp')
         		obj.$loaded().then(function(data) {
         			obj.status = status;
         			console.log(obj);
-        			obj.$save().then(function(ref) {
-					 	alert('Activity is ' + status + ' successfully');
-					 	$scope.getAdviosorData().then(function(data){
-				        	$scope.advisorActivities = data;
-				        });
+        			obj.$save().then(function(resp) {
+				
+					 	var activityRef = ref.child("traveller-activities").child(obj.travellerId).child(id);
+            	
+		            	objTravel = $firebaseObject(activityRef); 
+		        		objTravel.$loaded().then(function(data) {
+		        			objTravel.status = status;
+		        			console.log(objTravel);
+		        			objTravel.$save().then(function(resp) {
+							 	alert('Activity is ' + status + ' successfully');
+							 	$scope.getTravellerData().then(function(data){
+						        	$scope.travellerActivities = data;
+						        });
+
+						        $scope.getAdviosorData().then(function(data){
+						        	$scope.advisorActivities = data;
+						        });
+							}, function(error) {
+							 	console.log("Error:", error);
+							});
+						});
+
 					}, function(error) {
 					 	console.log("Error:", error);
 					});
 				});
+
+
 
             }
 			

@@ -47,7 +47,7 @@
                       <h4 class="row-center">My Trip:</h4>
                       <h6 class="row-center" ng-if="destinationsList.length==0">No Country is Selected</h6>
                       <ul class="list-group" destinations-list>
-                        <li ng-repeat='c in destinationsList' class="list-group-item" id="destination-{{c.code}}"><span class="flag-icon flag-icon-{{c.code}}"></span><span>&nbsp;&nbsp;{{c.name}}</span><button class="btn btn-xs btn-danger pull-right" ng-click=removeDestination(c.code)>X</button></li>
+                        <li ng-repeat='c in destinationsList' class="list-group-item" id="destination-{{c.code}}"><span class="flag-icon flag-icon-{{c.code | lowercase}}"></span><span>&nbsp;&nbsp;{{c.name}}</span><button class="btn btn-xs btn-danger pull-right" ng-click=removeDestination(c.code)>X</button></li>
                       </ul>
                     </div>
             </div>

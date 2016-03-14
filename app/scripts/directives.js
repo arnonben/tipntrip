@@ -17,10 +17,10 @@ return {
 
             if(isExist == false){
                 scope.destinationsList.push(scope.check);
-                var strElm = '<li class="list-group-item" id="destination-'+select_country.code+'"><span class="flag-icon flag-icon-'+select_country.code.toLowerCase()+'"></span><span>&nbsp;&nbsp;'+select_country.name+'</span><button class="btn btn-xs btn-danger pull-right" ng-click=removeDestination("'+select_country.code+'")>X</button></li>';
-                var compiledHtml = $compile(strElm);
-                var html = compiledHtml(scope);
-                element.append(html);
+                // var strElm = '<li class="list-group-item" id="destination-'+select_country.code+'"><span class="flag-icon flag-icon-'+select_country.code.toLowerCase()+'"></span><span>&nbsp;&nbsp;'+select_country.name+'</span><button class="btn btn-xs btn-danger pull-right" ng-click=removeDestination("'+select_country.code+'")>X</button></li>';
+                // var compiledHtml = $compile(strElm);
+                // var html = compiledHtml(scope);
+                //element.append(html);
             }
             console.log(isExist);
         };

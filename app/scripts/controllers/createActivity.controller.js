@@ -135,10 +135,15 @@ angular.module('tipntripApp')
 
                     var guid = $scope.guid();
 
+                    if($routeParams.activityId != undefined)
+                        guid = $routeParams.activityId;
+                    
                     var obj = travellerActivityRef.child(authData.uid).child(guid);
                     var objTravel = $firebaseObject(obj);
 
-                    objTravel.status = 'pending';
+                    if($routeParams.activityId == undefined)
+                        objTravel.status = 'pending';
+                        
                     objTravel.title = userActivity.title;
                     
                     if(userActivity.comment != undefined)
@@ -156,8 +161,9 @@ angular.module('tipntripApp')
                     var obj = advisorActivityRef.child($routeParams.advisorId).child(guid);
                     var objAdvisor = $firebaseObject(obj);
 
+                    if($routeParams.activityId == undefined)
+                        objAdvisor.status = 'pending';
 
-                    objAdvisor.status = 'pending';
                     objAdvisor.title = userActivity.title;
                     
                     if(userActivity.comment != undefined)
@@ -171,30 +177,6 @@ angular.module('tipntripApp')
                     objAdvisor.$save().then(function(ref) {
                         $location.path("/activity/"+guid+"/travel"); 
                     });
-
-                    if($routeParams.activityId != undefined)
-                    {
-                        // var objRef = travellerActivityRef.child(authData.uid).child($routeParams.activityId);
-                        // var obj = $firebaseObject(objRef); 
-                        // obj.$loaded().then(function(data) {
-                        //     obj.title = travelObj.title;
-                        //     obj.comment = travelObj.comment;
-                        //     obj.service_uid = travelObj.service_uid;
-                        //     obj.destinationList = travelObj.destinationList;
-                        //     obj.interest = travelObj.interest;
-
-                        //     obj.$save().then(function(ref) {
-                        //         alert('Activity is updated successfully');
-                        //     }, function(error) {
-                        //         console.log("Error:", error);
-                        //     });
-                        // });
-                    }
-                    else
-                    {
-                        
-                        
-                    }
                 }
 
              

@@ -61,6 +61,41 @@ angular.module('tipntripApp')
                 $scope.countries = countryFactory.getCountries();
 
                 $scope.advisorSecvices = $firebaseArray(advisorRef); 
+
+                if($routeParams.activityId != undefined)
+                {
+                    var objRef = travellerActivityRef.child(authData.uid).child($routeParams.activityId);
+                    var obj = $firebaseObject(objRef); 
+                    obj.$loaded().then(function(data) {
+                        
+                        //$scope.userActivity = data;
+                        $scope.userActivity.interest = [];
+
+                        console.log(data);
+
+                        angular.forEach($scope.roles, function(value, key){
+                            if(data.interest.indexOf(value.name) != -1)
+                                $scope.userActivity.interest[key] = true;
+                            else
+                                $scope.userActivity.interest[key] = false;
+                        });
+
+                        angular.forEach($scope.countries, function(value, key){
+                            if(data.destinationList.indexOf(value.name) != -1)
+                                $scope.destinationsList.push(value);
+                        });
+                        
+                        console.log($scope.destinationsList);
+
+                        $scope.userActivity.service_uid = data.service_uid;
+                        $scope.userActivity.title = data.title;
+                        $scope.userActivity.comment = data.comment;
+                        $scope.userActivity.activityId = data.id;
+
+                        console.log($scope.userActivity);
+                        console.log($scope.countries);
+                    });
+                }
                 
                 $scope.saveUserActivity = function(userActivity){
                     

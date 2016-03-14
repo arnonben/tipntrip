@@ -65,6 +65,10 @@ angular.module('tipntripApp')
                             templateUrl: 'views/activity/create-activity.html',
                             controller: 'CreateActivityCtrl'
                         })
+                        .when('/editActivity/:activityId/:advisorId', {
+                            templateUrl: 'views/activity/create-activity.html',
+                            controller: 'CreateActivityCtrl'
+                        })
                         .when('/activityList',{
                             templateUrl:'views/activity/activity-list.html',
                             controller : 'ActivityCtrl'

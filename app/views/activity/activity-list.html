@@ -35,7 +35,11 @@
               <h4>Status</h4>
               <h5 class="text-success">{{activity.status}}</h5>
             </div>
-            <div class="col-xs-2"><a href="#/activity/{{activity.key}}/travel" class="btn btn-default">Go to details</a></div>
+            <div class="col-xs-2">
+            <a href="#/activity/{{activity.key}}/travel" class="btn btn-default">Go to details</a><br/>
+            <button ng-if="activity.status != 'accept'" disabled="">Go To Virtual Planner</button><br/>
+            <a ng-if="activity.status == 'accept'" href="#/activity/{{activity.key}}/travel" class="btn btn-default">Go To Virtual Planner</a><br/>
+            </div>
           </div>
         </div>
       </div>
@@ -71,7 +75,13 @@
               <h4>Status</h4>
               <h5 class="text-success">{{activity.status}}</h5>
             </div>
-            <div class="col-xs-2"><a href="#/activity/{{activity.key}}/advisor" class="btn btn-default">Go to details</a></div>
+            <div class="col-xs-2">
+            <a href="#/activity/{{activity.key}}/advisor" class="btn btn-default">Go to details</a><br/>
+            <a ng-if="activity.status == 'accept'" href="#/activity/{{activity.key}}/advisor" class="btn btn-default">Go to Virtual Palnner</a><br/>
+            <button ng-if="activity.status != 'accept'" disabled="">Go To Virtual Planner</button><br/>
+            <a ng-if="activity.status == 'new'" ng-click="updateStatus('accept', activity.key)" href="" class="btn btn-default">Accept</a><br/>
+            <a ng-if="activity.status == 'new'" href="" ng-click="updateStatus('decline', activity.key)" class="btn btn-default">Decline</a><br/>
+            </div>
           </div>
         </div>
       </div>

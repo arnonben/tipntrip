@@ -18,7 +18,7 @@
       <h4>Status: <span class="text-warning">{{activity.status}}</span></h4>
    </div>
    <div class="col-xs-4" style="margin-top:1%;">
-         <button class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </button><br>
+         <a ng-if="activityType == 'Advisor'" href='#/editActivity/{{activityId}}/{{activity.advisorId}}' class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </a><br>
          <button class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
    </div>
 </div>

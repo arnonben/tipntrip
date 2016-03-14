@@ -112,6 +112,28 @@ angular.module('tipntripApp')
 			    return deferred.promise;
 
             }
+
+            $scope.updateStatus = function(status, id) {
+            	console.log(status);
+            	console.log(id);
+
+            	var activityRef = ref.child("advisor-activities").child(authData.uid).child(id);
+            	
+            	obj = $firebaseObject(activityRef); 
+        		obj.$loaded().then(function(data) {
+        			obj.status = status;
+        			console.log(obj);
+        			obj.$save().then(function(ref) {
+					 	alert('Activity is ' + status + ' successfully');
+					 	$scope.getAdviosorData().then(function(data){
+				        	$scope.advisorActivities = data;
+				        });
+					}, function(error) {
+					 	console.log("Error:", error);
+					});
+				});
+
+            }
 			
 			$scope.countries = countryFactory.getCountries();
             $scope.getCountryCode = function(countryName){
@@ -133,7 +155,9 @@ angular.module('tipntripApp')
 	        }
 	        else
 	        {
-
+	        	$scope.activityType = $routeParams.activityType;
+	        	$scope.activityId = $routeParams.activityId;
+	        	
 	        	if($routeParams.activityType == 'advisor')
 	        	{
 	        		$scope.activityType = 'Traveller';

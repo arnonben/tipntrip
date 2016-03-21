@@ -113,6 +113,48 @@ angular.module('tipntripApp')
 
             }
 
+            $scope.cancelActivity = function(id){
+            	var status = 'cancel';
+            	if($scope.activityType == 'Traveller')
+            	{
+            		$scope.updateStatus('cancel', id);
+            		return;
+            	}
+            	else
+            	{
+            		var activityRef = ref.child("traveller-activities").child(authData.uid).child(id);
+            		obj = $firebaseObject(activityRef); 
+        			obj.$loaded().then(function(data) {
+        			obj.status = status;
+        			console.log(obj);
+        			obj.$save().then(function(resp) {
+				
+					 	var activityRef = ref.child("advisor-activities").child(obj.advisorId).child(id);
+            	
+		            	objTravel = $firebaseObject(activityRef); 
+		        		objTravel.$loaded().then(function(data) {
+		        			objTravel.status = status;
+		        			objTravel.$save().then(function(resp) {
+							 	alert('Activity is ' + status + ' successfully');
+							 	$scope.getTravellerData().then(function(data){
+						        	$scope.travellerActivities = data;
+						        });
+
+						        $scope.getAdviosorData().then(function(data){
+						        	$scope.advisorActivities = data;
+						        });
+							}, function(error) {
+							 	console.log("Error:", error);
+							});
+						});
+
+					}, function(error) {
+					 	console.log("Error:", error);
+					});
+				});
+            	}
+            }
+
             $scope.updateStatus = function(status, id) {
             	console.log(status);
             	console.log(id);
@@ -149,9 +191,6 @@ angular.module('tipntripApp')
 					 	console.log("Error:", error);
 					});
 				});
-
-
-
             }
 			
 			$scope.countries = countryFactory.getCountries();

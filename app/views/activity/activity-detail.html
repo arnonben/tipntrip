@@ -19,9 +19,9 @@
    </div>
    <div class="col-xs-4" style="margin-top:1%;">
          <a ng-if="activityType == 'Advisor'" href='#/editActivity/{{activityId}}/{{activity.advisorId}}' class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </a><br>
-         <button ng-if="activity.status == 'pending'" ng-click="updateStatus('accept', activityId)" href="" class="btn btn-default">Accept</button><br/>
+         <button ng-show="activityType == 'Advisor'" ng-if="activity.status == 'pending'" ng-click="updateStatus('accept', activityId)" href="" class="btn btn-default">Accept</button><br/>
          <button ng-if="activity.status == 'accept'" ng-click="updateStatus('cancel', activityId)" href="" class="btn btn-default">Cancel</button><br/>
-         <button ng-if="activity.status == 'pending'" href="" ng-click="updateStatus('decline', activityId)" class="btn btn-default">Decline</button><br/>   
+         <button  ng-show="activityType == 'Advisor'" ng-if="activity.status == 'pending'" href="" ng-click="updateStatus('decline', activityId)" class="btn btn-default">Decline</button><br/>   
    </div>
 </div>
 <br/><br/>

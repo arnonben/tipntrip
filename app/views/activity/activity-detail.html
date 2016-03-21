@@ -19,7 +19,7 @@
    </div>
    <div class="col-xs-4" style="margin-top:1%;">
          <a ng-if="activityType == 'Advisor'" href='#/editActivity/{{activityId}}/{{activity.advisorId}}' class="btn btn-default btn-sm">&nbsp; Edit Meeting &nbsp; </a><br>
-         <button class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
+         <button ng-click="updateStatus('cancel', activityId);" class="btn btn-default btn-sm" style="margin-top:1%;">Cancel Meeting</button>     
    </div>
 </div>
 <br/><br/>
